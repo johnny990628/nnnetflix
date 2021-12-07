@@ -1,0 +1,22 @@
+[
+    {
+        "display_name": "Home",
+        "route": "/"
+    },
+    {
+        "display_name": "Popular",
+        "route": "/popular"
+    },
+    {
+        "display_name": "Discover",
+        "route": "/discover"
+    },
+    {
+        "display_name": "Categories",
+        "route": "/categories"
+    },
+    {
+        "display_name": "Setting",
+        "route": "/setting"
+    }
+]
