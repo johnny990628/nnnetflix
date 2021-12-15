@@ -10,12 +10,12 @@ const Layout = () => {
     return (
         <BrowserRouter>
             <Grid container spacing={3} style={{ height: '100vh' }}>
-                <Grid item xs={12} md={2} style={{ borderRight: '1px solid var(--main-color)' }}>
+                {/* <Grid item xs={12} md={2} style={{ borderRight: '1px solid var(--main-color)' }}>
                     <Sidebar />
-                </Grid>
+                </Grid> */}
                 <Grid item>
                     <Navtop />
-                    <Router />
+                    {/* <Router /> */}
                 </Grid>
             </Grid>
         </BrowserRouter>
