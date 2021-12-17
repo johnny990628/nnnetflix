@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Button } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Button, Box } from '@mui/material';
 import sidebarItems from '../../assets/JsonData/sidebar.json';
 
-const useStyles = makeStyles({
+const styles = {
     sidebar: {
         height: '100vh',
         position: 'fixed',
@@ -25,35 +24,33 @@ const useStyles = makeStyles({
             color: 'var(--main-color)',
         },
     },
-});
+};
 
 const SidebarItem = (props) => {
-    const classes = useStyles();
     const { active, title } = props;
-
     const isActive = active ? 'active' : '';
     return (
-        <Button variant="text" className={`${classes.item} ${isActive}`}>
+        <Button variant="text" sx={styles.item} className={isActive}>
             {title}
         </Button>
     );
 };
 
 const Sidebar = () => {
-    const classes = useStyles();
     const location = useLocation();
     const activeItem = sidebarItems.findIndex((item) => item.route === location.pathname);
-
     return (
-        <div className={classes.sidebar}>
-            {sidebarItems.map((item, index) => {
-                return (
-                    <Link to={item.route} key={index} style={{ textDecoration: 'none' }}>
-                        <SidebarItem title={item.display_name} active={index === activeItem} />
-                    </Link>
-                );
-            })}
-        </div>
+        <Box>
+            <Box sx={styles.sidebar}>
+                {sidebarItems.map((item, index) => {
+                    return (
+                        <Link to={item.route} key={index} style={{ textDecoration: 'none' }}>
+                            <SidebarItem title={item.display_name} active={index === activeItem} />
+                        </Link>
+                    );
+                })}
+            </Box>
+        </Box>
     );
 };
 

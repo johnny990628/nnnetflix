@@ -1,12 +1,11 @@
 import React, { useState } from 'react';
 
-import { Tabs, Tab, Avatar, Badge, AppBar, Toolbar, InputBase, Typography, useMediaQuery } from '@mui/material';
+import { Tabs, Tab, Avatar, Badge, AppBar, Toolbar, InputBase, Typography, useMediaQuery, Box } from '@mui/material';
 import { Search, Email, Notifications } from '@mui/icons-material';
-import { makeStyles } from '@mui/styles';
 import { useTheme } from '@mui/material/styles';
 import { Link } from 'react-router-dom';
 
-const useStyles = makeStyles({
+const styles = {
     toolbar: {
         display: 'flex',
         justifyContent: 'space-between',
@@ -34,10 +33,9 @@ const useStyles = makeStyles({
         alignItems: 'center',
     },
     searchButton: { marginRight: '20px' },
-});
+};
 
 const Navtop = () => {
-    const classes = useStyles();
     const theme = useTheme();
     const isPhone = useMediaQuery(theme.breakpoints.down('md'));
     const [value, setValue] = useState();
@@ -46,37 +44,34 @@ const Navtop = () => {
     };
 
     return (
-        <AppBar color="transparent">
-            <Toolbar className={classes.toolbar}>
+        <AppBar elevation={0} position="fixed" sx={{ backgroundColor: 'var(--main-bg)' }}>
+            <Toolbar sx={styles.toolbar}>
                 <Typography variant="h6">NNNETFLIX</Typography>
                 {!isPhone && (
-                    <div className={classes.searchbar}>
+                    <Box sx={styles.searchbar}>
                         <Search sx={{ color: 'var(--text-color)', margin: '0 10px' }} />
-                        <InputBase placeholder="Search..." className={classes.input} />
-                    </div>
+                        <InputBase placeholder="Search..." sx={styles.input} />
+                    </Box>
                 )}
 
-                <Tabs value={value} textColor="inherit" onChange={handleChange}>
+                {/* <Tabs value={value} textColor="inherit" onChange={handleChange}>
                     <Tab label="Main" component={Link} to="/" />
                     <Tab label="Popular" component={Link} to="/popular" />
-                </Tabs>
+                </Tabs> */}
 
-                <div className={classes.icons}>
+                <Box sx={styles.icons}>
                     {isPhone && (
-                        <Search
-                            sx={{ color: 'var(--text-color)', margin: '0 10px' }}
-                            className={classes.searchButton}
-                        />
+                        <Search sx={{ color: 'var(--text-color)', margin: '0 10px' }} sx={styles.searchButton} />
                     )}
 
-                    <Badge badgeContent={4} color="primary" className={classes.badge}>
+                    <Badge badgeContent={4} color="primary" sx={styles.badge}>
                         <Email />
                     </Badge>
-                    <Badge badgeContent={6} color="primary" className={classes.badge}>
+                    <Badge badgeContent={6} color="primary" sx={styles.badge}>
                         <Notifications />
                     </Badge>
                     <Avatar color="primary">XUN</Avatar>
-                </div>
+                </Box>
             </Toolbar>
         </AppBar>
     );
