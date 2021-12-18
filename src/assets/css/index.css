@@ -1,5 +1,6 @@
 :root {
     --main-bg: #1c1c28;
+    --second-bg: #303035;
     --text-color: #ffffff;
     --main-color: #2496ff;
     --searchbar-color: #2d2d42;
@@ -12,6 +13,7 @@
     box-sizing: border-box;
 }
 body {
-    background-color: var(--main-bg);
+    background: var(--main-bg);
+    height: 100vh;
     color: var(--text-color);
 }

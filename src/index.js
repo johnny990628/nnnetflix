@@ -4,6 +4,8 @@ import reportWebVitals from './reportWebVitals';
 
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './assets/css/index.css';
+import 'slick-carousel/slick/slick.css';
+import 'slick-carousel/slick/slick-theme.css';
 import Layout from './components/layout';
 
 const theme = createTheme({});

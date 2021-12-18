@@ -14,9 +14,9 @@ const Layout = () => {
                     <Navtop />
                 </Grid>
                 <Grid item xs={2}>
-                    <Sidebar />
+                    {/* <Sidebar /> */}
                 </Grid>
-                <Grid item xs={8} sx={{ margin: '50px' }}>
+                <Grid item xs={10} sx={{ marginTop: '50px' }}>
                     <Router />
                 </Grid>
             </Grid>
