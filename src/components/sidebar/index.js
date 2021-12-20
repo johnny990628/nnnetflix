@@ -1,10 +1,9 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import { Box, ToggleButton, ToggleButtonGroup } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { Button, Box } from '@mui/material';
 import sidebarItems from '../../assets/JsonData/sidebar.json';
 
-const useStyles = makeStyles({
+const styles = {
     sidebar: {
         height: '100vh',
         position: 'fixed',
@@ -12,41 +11,46 @@ const useStyles = makeStyles({
         top: 250,
     },
     item: {
+        display: 'flex',
+        flexDirection: 'column',
+        fontSize: '26px',
         color: 'var(--text-color)',
         padding: '15px 25px',
         alignItems: 'center',
         transition: 'color 0.3s ease 0s',
         border: 'none',
         textTransform: 'capitalize',
+        '&.active': {
+            color: 'var(--main-color)',
+        },
     },
-});
+};
+
+const SidebarItem = (props) => {
+    const { active, title } = props;
+    const isActive = active ? 'active' : '';
+    return (
+        <Button variant="text" sx={styles.item} className={isActive}>
+            {title}
+        </Button>
+    );
+};
 
 const Sidebar = () => {
-    const classes = useStyles();
     const location = useLocation();
-    const [view, setView] = React.useState('main');
-
-    const handleChange = (event, nextView) => {
-        setView(nextView);
-    };
-
+    const activeItem = sidebarItems.findIndex((item) => item.route === location.pathname);
     return (
-        <ToggleButtonGroup
-            className={classes.sidebar}
-            color="primary"
-            orientation="vertical"
-            value={view}
-            exclusive
-            onChange={handleChange}
-        >
-            {sidebarItems.map((item, index) => {
-                return (
-                    <ToggleButton component={Link} to={item.route} className={classes.item} value={item.display_name}>
-                        {item.display_name}
-                    </ToggleButton>
-                );
-            })}
-        </ToggleButtonGroup>
+        <Box>
+            <Box sx={styles.sidebar}>
+                {sidebarItems.map((item, index) => {
+                    return (
+                        <Link to={item.route} key={index} style={{ textDecoration: 'none' }}>
+                            <SidebarItem title={item.display_name} active={index === activeItem} />
+                        </Link>
+                    );
+                })}
+            </Box>
+        </Box>
     );
 };
 
