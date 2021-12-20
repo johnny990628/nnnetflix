@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 
 import { Tabs, Tab, Avatar, Badge, AppBar, Toolbar, InputBase, Typography, useMediaQuery, Box } from '@mui/material';
 import { Search, Email, Notifications } from '@mui/icons-material';
@@ -36,31 +36,6 @@ const styles = {
 };
 
 const Navtop = () => {
-<<<<<<< HEAD
-  const [value, setValue] = React.useState(0);
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
-  return (
-    <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static" color="transparent">
-        <Toolbar>
-          {/* <Tabs value={value} textColor="inherit" onChange={handleChange}>
-                        <Tab label="Main" component={Link} to="/" />
-                        <Tab label="Popular" component={Link} to="/popular" />
-                    </Tabs> */}
-          <div>
-            <SearchIcon />
-            <InputBase
-              placeholder="Search…"
-              inputProps={{ "aria-label": "search" }}
-            />
-          </div>
-        </Toolbar>
-      </AppBar>
-    </Box>
-  );
-=======
     const theme = useTheme();
     const isPhone = useMediaQuery(theme.breakpoints.down('md'));
     const [value, setValue] = useState();
@@ -100,7 +75,6 @@ const Navtop = () => {
             </Toolbar>
         </AppBar>
     );
->>>>>>> f21aeced4200afb0f261503b351352bd6e8f8eaf
 };
 
 export default Navtop;
