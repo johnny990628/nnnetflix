@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 
-import { Tabs, Tab, Avatar, Badge, AppBar, Toolbar, InputBase, Typography, useMediaQuery, Box } from '@mui/material';
-import { Search, Email, Notifications } from '@mui/icons-material';
+import { IconButton, Avatar, Badge, AppBar, Toolbar, InputBase, Typography, useMediaQuery, Box } from '@mui/material';
+import { Search, Email, Notifications, Menu } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
-import { Link } from 'react-router-dom';
 
 const styles = {
     toolbar: {
@@ -35,18 +34,19 @@ const styles = {
     searchButton: { marginRight: '20px' },
 };
 
-const Navtop = () => {
+const Navtop = ({ openDrawer }) => {
     const theme = useTheme();
-    const isPhone = useMediaQuery(theme.breakpoints.down('md'));
-    const [value, setValue] = useState();
-    const handleChange = (event, newValue) => {
-        setValue(newValue);
-    };
+    const isPhone = useMediaQuery(theme.breakpoints.down('sm'));
 
     return (
         <AppBar elevation={0} position="fixed" sx={{ backgroundColor: 'var(--main-bg)' }}>
             <Toolbar sx={styles.toolbar}>
-                <Typography variant="h6">NNNETFLIX</Typography>
+                <Box sx={{ display: 'flex' }}>
+                    <IconButton sx={{ color: 'var(--text-color)' }} onClick={openDrawer}>
+                        <Menu />
+                    </IconButton>
+                    {/* <Typography variant="h5">NNNETFLIX</Typography> */}
+                </Box>
                 {!isPhone && (
                     <Box sx={styles.searchbar}>
                         <Search sx={{ color: 'var(--text-color)', margin: '0 10px' }} />

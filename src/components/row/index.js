@@ -27,9 +27,9 @@ const styles = {
 const useStyles = makeStyles((theme) => ({
     title: {
         margin: theme.spacing(3),
-        fontSize: '2rem',
-        [theme.breakpoints.up('sm')]: { fontSize: '2.5rem' },
-        [theme.breakpoints.up('md')]: { fontSize: '3.5rem' },
+        fontSize: '1.5rem',
+        [theme.breakpoints.up('sm')]: { fontSize: '2rem' },
+        [theme.breakpoints.up('md')]: { fontSize: '2.5rem' },
     },
 }));
 
@@ -93,7 +93,7 @@ const Row = ({ title, type }) => {
     }, []);
 
     return (
-        <Box sx={{ width: '85%', margin: '20px' }}>
+        <Box>
             <Typography className={bpStyles.title}>{title}</Typography>
             <Slider {...settings}>
                 {movie.map((item) => {

@@ -1,11 +1,12 @@
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
 :root {
-    --main-bg: #1c1c28;
-    --second-bg: #303035;
+    --main-bg: rgba(28, 28, 40);
+    --second-bg: rgba(28, 28, 40, 0.8);
     --text-color: #ffffff;
     --main-color: #2496ff;
     --searchbar-color: #2d2d42;
     --searchbar-color-hover: #3f3f5a;
+    --drawer-width: 16%;
 }
 
 * {
@@ -15,6 +16,6 @@
 }
 body {
     background: var(--main-bg);
-    height: 100vh;
+    height: 100%;
     color: var(--text-color);
 }
