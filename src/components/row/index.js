@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Box, Card, CardContent, CardMedia, CardActions, Typography } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import ArrowForwardIosIcon from '@mui/icons-material/ArrowForwardIos';
 import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import Slider from 'react-slick';
@@ -12,19 +13,9 @@ const styles = {
         textOverflow: 'ellipsis',
     },
     cardBar: { backgroundColor: 'rgba(0,255,204,0.2)' },
-    rows: {
-        display: 'flex',
-        overflowY: 'hidden',
-        overflowX: 'scroll',
-        scrollbarWidth: 'none',
-        width: '100%',
-        padding: '20px',
-        transition: 'transform 1s',
-        position: 'relative',
-    },
     row: {
         borderRadius: '10px',
-        maxHeight: '300px',
+        maxWidth: 'calc(100% - 1rem)',
         objectFit: 'contain',
         marginRight: '10px',
         '&:hover': {
@@ -33,6 +24,14 @@ const styles = {
         },
     },
 };
+const useStyles = makeStyles((theme) => ({
+    title: {
+        margin: theme.spacing(3),
+        fontSize: '1.5rem',
+        [theme.breakpoints.up('sm')]: { fontSize: '2rem' },
+        [theme.breakpoints.up('md')]: { fontSize: '2.5rem' },
+    },
+}));
 
 const Arrow = ({ className, style, onClick, isLeft }) => {
     return (
@@ -62,24 +61,31 @@ const settings = {
     prevArrow: <Arrow isLeft={true} />,
     responsive: [
         {
+            breakpoint: 1440,
+            settings: {
+                slidesToShow: 5,
+                infinite: true,
+            },
+        },
+        {
             breakpoint: 1024,
             settings: {
-                slidesToShow: 3,
-                slidesToScroll: 3,
+                slidesToShow: 4,
                 infinite: true,
             },
         },
         {
             breakpoint: 600,
             settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
+                slidesToShow: 3,
                 infinite: true,
             },
         },
     ],
 };
+
 const Row = ({ title, type }) => {
+    const bpStyles = useStyles();
     const [movie, setMovie] = useState([]);
     useEffect(async () => {
         const movies = await API.getMovie(type);
@@ -87,8 +93,8 @@ const Row = ({ title, type }) => {
     }, []);
 
     return (
-        <Box sx={{ width: '95%', margin: '20px' }}>
-            <Typography sx={{ fontSize: '40px', margin: '20px' }}>{title}</Typography>
+        <Box>
+            <Typography className={bpStyles.title}>{title}</Typography>
             <Slider {...settings}>
                 {movie.map((item) => {
                     return (

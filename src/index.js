@@ -8,7 +8,11 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 import Layout from './components/layout';
 
-const theme = createTheme({});
+const theme = createTheme({
+    typography: {
+        fontFamily: `'cwTeXYen', sans-serif`,
+    },
+});
 
 ReactDOM.render(
     <React.StrictMode>

@@ -1,25 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import Sidebar from "../sidebar";
+import Drawer from "../drawer";
 import Navtop from "../navtop";
 import Router from "../Router";
-import { Grid } from "@mui/material";
 
-// import './layout.css';
+import { useMediaQuery, Box } from "@mui/material";
+import { useTheme } from "@mui/material/styles";
 import { BrowserRouter } from "react-router-dom";
 const Layout = () => {
+  const theme = useTheme();
+  const isComputer = useMediaQuery(theme.breakpoints.up("lg"));
+  const [drawer, setDrawer] = useState(false);
+  const openDrawer = () => {
+    setDrawer(true);
+  };
   return (
     <BrowserRouter>
-      <Grid container spacing={3}>
-        <Grid item xs={12}>
-          <Navtop />
-        </Grid>
-        <Grid item xs={2}>
-          {/* <Sidebar /> */}
-        </Grid>
-        <Grid item xs={10} sx={{ marginTop: "50px" }}>
+      <Box sx={{ display: "flex" }}>
+        <Navtop openDrawer={openDrawer} />
+        <Drawer isOpen={drawer} isComputer={isComputer} setDrawer={setDrawer} />
+        <Box
+          sx={{
+            width: "calc(90% - var(--drawer-width))",
+            margin: "3rem 0 2.5rem 4rem",
+            padding: "1rem",
+          }}
+        >
           <Router />
-        </Grid>
-      </Grid>
+        </Box>
+      </Box>
     </BrowserRouter>
   );
 };
