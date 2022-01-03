@@ -1,9 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState } from "react";
 
-<<<<<<< HEAD
 import {
-  Tabs,
-  Tab,
+  IconButton,
   Avatar,
   Badge,
   AppBar,
@@ -13,14 +11,8 @@ import {
   useMediaQuery,
   Box,
 } from "@mui/material";
-import { Search, Email, Notifications } from "@mui/icons-material";
+import { Search, Email, Notifications, Menu } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
-import { Link } from "react-router-dom";
-=======
-import { IconButton, Avatar, Badge, AppBar, Toolbar, InputBase, Typography, useMediaQuery, Box } from '@mui/material';
-import { Search, Email, Notifications, Menu } from '@mui/icons-material';
-import { useTheme } from '@mui/material/styles';
->>>>>>> 68695ec61c4aca76a41dffb750d150673823376d
 
 const styles = {
   toolbar: {
@@ -42,35 +34,39 @@ const styles = {
     color: "var(--text-color)",
     flexGrow: 1,
   },
-  badge: {
-    marginRight: "20px",
-  },
+
   icons: {
     display: "flex",
     alignItems: "center",
   },
+  iconBtn: { color: "var(--text-color)", marginRight: "10px" },
+
   searchButton: { marginRight: "20px" },
 };
 
 const Navtop = ({ openDrawer }) => {
-    const theme = useTheme();
-    const isPhone = useMediaQuery(theme.breakpoints.down('sm'));
+  const theme = useTheme();
+  const isPhone = useMediaQuery(theme.breakpoints.down("sm"));
 
-    return (
-        <AppBar elevation={0} position="fixed" sx={{ backgroundColor: 'var(--main-bg)' }}>
-            <Toolbar sx={styles.toolbar}>
-                <Box sx={{ display: 'flex' }}>
-                    <IconButton sx={{ color: 'var(--text-color)' }} onClick={openDrawer}>
-                        <Menu />
-                    </IconButton>
-                    {/* <Typography variant="h5">NNNETFLIX</Typography> */}
-                </Box>
-                {!isPhone && (
-                    <Box sx={styles.searchbar}>
-                        <Search sx={{ color: 'var(--text-color)', margin: '0 10px' }} />
-                        <InputBase placeholder="Search..." sx={styles.input} />
-                    </Box>
-                )}
+  return (
+    <AppBar
+      elevation={0}
+      position="fixed"
+      sx={{ backgroundColor: "var(--main-bg)" }}
+    >
+      <Toolbar sx={styles.toolbar}>
+        <Box sx={{ display: "flex" }}>
+          <IconButton sx={styles.iconBtn} onClick={openDrawer}>
+            <Menu />
+          </IconButton>
+          {/* <Typography variant="h5">NNNETFLIX</Typography> */}
+        </Box>
+        {!isPhone && (
+          <Box sx={styles.searchbar}>
+            <Search sx={{ color: "var(--text-color)", margin: "0 10px" }} />
+            <InputBase placeholder="Search..." sx={styles.input} />
+          </Box>
+        )}
 
         {/* <Tabs value={value} textColor="inherit" onChange={handleChange}>
                     <Tab label="Main" component={Link} to="/" />
@@ -79,37 +75,27 @@ const Navtop = ({ openDrawer }) => {
 
         <Box sx={styles.icons}>
           {isPhone && (
-            <Search
-              sx={{ color: "var(--text-color)", margin: "0 10px" }}
-              sx={styles.searchButton}
-            />
+            <IconButton sx={styles.iconBtn}>
+              <Search />
+            </IconButton>
           )}
-
-<<<<<<< HEAD
-          <Badge badgeContent={4} color="primary" sx={styles.badge}>
-            <Email />
-          </Badge>
-          <Badge badgeContent={6} color="primary" sx={styles.badge}>
-            <Notifications />
-          </Badge>
-          <Avatar color="primary">XUN</Avatar>
+          <IconButton sx={styles.iconBtn}>
+            <Badge badgeContent={4} color="primary">
+              <Email />
+            </Badge>
+          </IconButton>
+          <IconButton sx={styles.iconBtn}>
+            <Badge badgeContent={6} color="primary">
+              <Notifications />
+            </Badge>
+          </IconButton>
+          <IconButton sx={styles.iconBtn}>
+            <Avatar color="primary">XUN</Avatar>
+          </IconButton>
         </Box>
       </Toolbar>
     </AppBar>
   );
-=======
-                    <Badge badgeContent={4} color="primary" sx={styles.badge}>
-                        <Email />
-                    </Badge>
-                    <Badge badgeContent={6} color="primary" sx={styles.badge}>
-                        <Notifications />
-                    </Badge>
-                    <Avatar color="primary">XUN</Avatar>
-                </Box>
-            </Toolbar>
-        </AppBar>
-    );
->>>>>>> 68695ec61c4aca76a41dffb750d150673823376d
 };
 
 export default Navtop;
