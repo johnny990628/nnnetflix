@@ -22,9 +22,10 @@ const Card = ({ item }) => {
       <Box
         key={item.id}
         component="img"
-        src={IMG_URL + item.poster_path}
+        src={IMG_URL + item.poster_path || item.backdrop_path}
         alt={item.title}
         sx={styles.row}
+        loading="lazy"
       />
     </>
   );
