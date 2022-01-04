@@ -5,7 +5,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import API, { IMG_URL } from "../../api/api";
 
-import Card from "../card";
+import MovieCard from "../moviecard";
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -56,10 +56,10 @@ const MovieList = ({ type }) => {
         dataLength={movie.length}
         next={fetchData}
         hasMore={hasMore}
-        loader={<h4>Loading...</h4>}
+        loader={<Box sx={{ fontSize: "2rem" }}>Loading...</Box>}
       >
         {movie.map((item) => {
-          return <Card key={item.id} item={item} />;
+          return <MovieCard key={item.id} item={item} />;
         })}
       </InfiniteScroll>
     </Box>

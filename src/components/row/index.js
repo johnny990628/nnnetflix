@@ -6,7 +6,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import Slider from "react-slick";
 import API, { IMG_URL } from "../../api/api";
 
-import Card from "../card";
+import MovieCard from "../moviecard";
 
 const useStyles = makeStyles((theme) => ({
   title: {
@@ -81,7 +81,7 @@ const Row = ({ title, type }) => {
       <Typography className={bpStyles.title}>{title}</Typography>
       <Slider {...settings}>
         {movie.map((item) => {
-          return <Card item={item} />;
+          return <MovieCard item={item} />;
         })}
       </Slider>
     </Box>
