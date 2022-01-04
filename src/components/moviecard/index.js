@@ -1,47 +1,58 @@
-import React, { useEffect, useState } from "react";
-import { Box, Card, CardContent, CardMedia } from "@mui/material";
+import React, { useEffect, useState } from 'react';
+import { Box, Card, CardContent, CardMedia, Skeleton } from '@mui/material';
 
-import { IMG_URL } from "../../api/api";
+import { IMG_URL } from '../../api/api';
 
 const styles = {
-  card: {
-    position: "relative",
-    maxWidth: "calc(100% - 1rem)",
-    objectFit: "contain",
-    marginRight: "10px",
-    padding: ".3rem",
-    backgroundColor: "transparent",
-    "&:hover": {
-      transform: "scale(1.02)",
-      opacity: 1,
-      cursor: "pointer",
+    container: {
+        position: 'relative',
+        display: 'flex',
+        alignItems: 'flex-end',
     },
-  },
-  text: {
-    color: "var(--text-color)",
-    overflow: "hidden",
-    whiteSpace: "nowrap",
-    textOverflow: "ellipsis",
-  },
+    img: {
+        maxWidth: 'calc(100% - 1rem)',
+        objectFit: 'contain',
+        transition: '.3s ease-out',
+        '&:hover': {
+            transform: 'scale(1.02)',
+            opacity: 1,
+            cursor: 'pointer',
+        },
+    },
+    content: {
+        position: 'absolute',
+        bottom: '10px',
+        left: '10px',
+        background: 'black',
+    },
+    text: {
+        color: 'var(--text-color)',
+        overflow: 'hidden',
+        whiteSpace: 'nowrap',
+        textOverflow: 'ellipsis',
+    },
 };
 
 const MovieCard = ({ item }) => {
-  return (
-    <Card sx={styles.card} elevation={0}>
-      <Box>
-        <CardMedia
-          component="img"
-          src={IMG_URL + item.poster_path || item.backdrop_path}
-          alt={item.title}
-          loading="lazy"
-          sx={{ borderRadius: "10px" }}
-        />
-        <CardContent>
-          <Box sx={styles.text}>{item.title}</Box>
-        </CardContent>
-      </Box>
-    </Card>
-  );
+    const [loading, setLoading] = useState(true);
+    return (
+        <Box sx={styles.container}>
+            {/* {loading && <Skeleton sx={{ height: '35vw' }} />} */}
+            <Box
+                component="img"
+                src={IMG_URL + item.poster_path || item.backdrop_path}
+                alt={item.title}
+                loading="lazy"
+                sx={styles.img}
+                onLoad={() => {
+                    setLoading(false);
+                }}
+            />
+            <Box sx={styles.content}>
+                <Box sx={styles.text}>{item.title}</Box>
+            </Box>
+        </Box>
+    );
 };
 
 export default MovieCard;
