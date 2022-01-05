@@ -7,10 +7,8 @@ const styles = {
     container: {
         position: 'relative',
         maxWidth: 'calc(100% - 1rem)',
-        objectFit: 'contain',
         display: 'flex',
         alignItems: 'flex-end',
-        marginRight: '1rem',
         backgroundColor: 'transparent',
         transition: '.5s ease-out',
         '&:hover': {
@@ -19,22 +17,22 @@ const styles = {
             cursor: 'pointer',
             '& .overlay': {
                 top: '0',
-                height: '100%',
             },
         },
     },
     img: {
+        objectFit: 'fill',
         borderRadius: '2rem',
     },
     overlay: {
         position: 'absolute',
         backgroundColor: 'rgba(0,0,0,.7)',
-
         width: '100%',
-
+        height: '100%',
         color: 'var(--text-color)',
         borderRadius: '2rem',
         textAlign: 'center',
+        padding: '1rem',
 
         display: 'flex',
         flexDirection: 'column',
