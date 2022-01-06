@@ -34,7 +34,8 @@ const useStyles = makeStyles((theme) => ({
     iconBtn: { color: 'var(--text-color)', marginRight: '10px' },
     searchButton: { marginRight: '20px' },
     popover: {
-        // width: '20%',
+        minWidth: '20%',
+        maxHeight: '60%',
     },
     img: { marginLeft: '2rem' },
 }));
@@ -56,7 +57,7 @@ const SearchBar = ({ type }) => {
     };
     useEffect(async () => {
         let results = await API.getSearch(value);
-        if (results) setResult(results.slice(0, 5));
+        if (results) setResult(results.slice(0, 10));
     }, [value]);
     return (
         <>
@@ -93,7 +94,7 @@ const SearchBar = ({ type }) => {
                                     return (
                                         <ListItem disablePadding>
                                             <ListItemButton>
-                                                <ListItemText primary={item.name} />
+                                                <ListItemText primary={item.title} />
                                                 <img
                                                     src={`${IMG_URL_SM}${item.poster_path || item.backdrop_path}`}
                                                     className={classes.img}

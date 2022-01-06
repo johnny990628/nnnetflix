@@ -19,7 +19,7 @@ export default {
     },
     getSearch: (query, page = 1) => {
         return axios
-            .get(`${BASE_URL}/search/collection`, {
+            .get(`${BASE_URL}/search/movie`, {
                 params: {
                     api_key: TMDB_API_KEY,
                     language: 'zh-TW',
