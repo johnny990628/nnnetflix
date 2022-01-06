@@ -59,7 +59,7 @@ const MovieCard = ({ item }) => {
                 {/* {loading && <Skeleton sx={{ height: '35vw' }} />} */}
                 <CardMedia
                     component="img"
-                    src={IMG_URL + item.poster_path || item.backdrop_path}
+                    src={`${IMG_URL}${item.poster_path || item.backdrop_path}`}
                     alt={item.title}
                     loading="lazy"
                     sx={styles.img}
