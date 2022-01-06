@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
         minWidth: '20%',
         maxHeight: '60%',
     },
-    img: { marginLeft: '2rem' },
+    listImg: { marginLeft: '1rem' },
 }));
 
 const SearchBar = ({ type }) => {
@@ -93,11 +93,11 @@ const SearchBar = ({ type }) => {
                                 result.map((item) => {
                                     return (
                                         <ListItem disablePadding>
-                                            <ListItemButton>
+                                            <ListItemButton sx={{ minHeight: '100px' }}>
                                                 <ListItemText primary={item.title} />
                                                 <img
                                                     src={`${IMG_URL_SM}${item.poster_path || item.backdrop_path}`}
-                                                    className={classes.img}
+                                                    className={classes.listImg}
                                                 />
                                             </ListItemButton>
                                         </ListItem>
