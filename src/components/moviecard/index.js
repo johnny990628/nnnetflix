@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from 'react';
-import { Box, Card, CardContent, CardMedia, Skeleton, Typography } from '@mui/material';
+import { Box, Card, CardContent, CardMedia, Skeleton, Typography, Button } from '@mui/material';
 
 import { IMG_URL } from '../../api/api';
+import Modal from '../modal';
 
 const styles = {
     container: {
@@ -21,7 +22,6 @@ const styles = {
         },
     },
     img: {
-        objectFit: 'fill',
         borderRadius: '2rem',
     },
     overlay: {
@@ -52,14 +52,21 @@ const styles = {
 };
 
 const MovieCard = ({ item }) => {
+    const [openModal, setOpenModal] = useState(false);
     const [loading, setLoading] = useState(true);
+
+    const handleModal = (isOpen) => {
+        console.log(isOpen);
+        setOpenModal(isOpen);
+    };
+
     return (
-        <Card sx={styles.container} elevation={0}>
+        <Card sx={styles.container} elevation={0} onClick={() => handleModal(true)}>
             <Box>
                 {/* {loading && <Skeleton sx={{ height: '35vw' }} />} */}
                 <CardMedia
                     component="img"
-                    src={`${IMG_URL}${item.poster_path || item.backdrop_path}`}
+                    src={IMG_URL + item.poster_path || item.backdrop_path}
                     alt={item.title}
                     loading="lazy"
                     sx={styles.img}
@@ -75,6 +82,7 @@ const MovieCard = ({ item }) => {
                     <Typography sx={styles.text}>{item.overview}</Typography>
                 </Box>
             </Box>
+            <Modal open={openModal} handleModal={handleModal} />
         </Card>
     );
 };
