@@ -6,6 +6,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import './assets/css/index.css';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
+import '../node_modules/react-modal-video/scss/modal-video.scss';
 import Layout from './components/layout';
 
 const theme = createTheme({

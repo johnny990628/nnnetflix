@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Skeleton, Typography, Button } from '@mui/material';
-
+import { PlayArrow } from '@mui/icons-material';
 import { IMG_URL } from '../../api/api';
 import Modal from '../modal';
 
@@ -53,11 +53,11 @@ const styles = {
 };
 
 const MovieCard = ({ item }) => {
+    const location = useLocation();
     const [openModal, setOpenModal] = useState(false);
     const [loading, setLoading] = useState(true);
 
     const handleModal = (isOpen) => {
-        console.log(isOpen);
         setOpenModal(isOpen);
     };
 
@@ -80,13 +80,20 @@ const MovieCard = ({ item }) => {
                             setLoading(false);
                         }}
                     />
-                    <Box className="overlay" sx={styles.overlay}>
-                        <Typography variant="h5" sx={styles.title}>
-                            {item.title}
-                        </Typography>
-                        <Typography sx={styles.text}>{item.release_date}</Typography>
-                        <Typography sx={styles.text}>{item.overview}</Typography>
-                    </Box>
+
+                    {location.pathname.includes('movie') ? (
+                        <Box className="overlay" sx={[styles.overlay, { alignItems: 'center' }]}>
+                            <PlayArrow sx={{ fontSize: '5rem' }} />
+                        </Box>
+                    ) : (
+                        <Box className="overlay" sx={styles.overlay}>
+                            <Typography variant="h5" sx={styles.title}>
+                                {item.title}
+                            </Typography>
+                            <Typography sx={styles.text}>{item.release_date}</Typography>
+                            <Typography sx={styles.text}>{item.overview}</Typography>
+                        </Box>
+                    )}
                 </Box>
                 {/* <Modal open={openModal} handleModal={handleModal} /> */}
             </Card>

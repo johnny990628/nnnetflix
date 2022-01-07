@@ -15,9 +15,12 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-infinite-scroll-component": "^6.1.0",
+    "react-modal-video": "^1.2.8",
     "react-router-dom": "^6.0.2",
     "react-scripts": "4.0.3",
     "react-slick": "^0.28.1",
+    "react-youtube-modal": "^1.1.1",
+    "sass": "^1.46.0",
     "slick-carousel": "^1.8.1",
     "web-vitals": "^1.1.2"
   },
