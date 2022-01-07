@@ -5,6 +5,7 @@ import Home from "../pages/Home";
 import Discover from "../pages/Discover";
 import Categories from "../pages/Categories";
 import Setting from "../pages/Setting";
+import MovieInfo from "../pages/MovieInfo";
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
       <Route path="/discover" element={<Discover />} />
       <Route path="/categories" element={<Categories />} />
       <Route path="/setting" element={<Setting />} />
+      <Route path="/movie/:movieID" element={<MovieInfo />} />
     </Routes>
   );
 };

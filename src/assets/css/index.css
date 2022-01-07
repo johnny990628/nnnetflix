@@ -1,21 +1,21 @@
 @import url(https://fonts.googleapis.com/earlyaccess/cwtexyen.css);
 :root {
-    --main-bg: rgba(28, 28, 40);
-    --second-bg: rgba(28, 28, 40, 0.8);
-    --text-color: #ffffff;
-    --main-color: #2496ff;
-    --searchbar-color: #2d2d42;
-    --searchbar-color-hover: #3f3f5a;
-    --drawer-width: 16%;
+  --main-bg: rgba(28, 28, 40);
+  --second-bg: rgba(28, 28, 40, 0.8);
+  --text-color: #ffffff;
+  --main-color: #2495ffe7;
+  --searchbar-color: #2d2d42;
+  --searchbar-color-hover: #3f3f5a;
+  --drawer-width: 16%;
 }
 
 * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 body {
-    background: var(--main-bg);
-    height: 100%;
-    color: var(--text-color);
+  background: var(--main-bg);
+  height: 100%;
+  color: var(--text-color);
 }
