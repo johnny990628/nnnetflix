@@ -61,4 +61,14 @@ export default {
                   })
               ).data;
     },
+    getImage: (movieid) => {
+        return axios
+            .get(`${BASE_URL}/movie/${movieid}/images`, {
+                params: {
+                    api_key: TMDB_API_KEY,
+                },
+            })
+            .then((res) => res.data)
+            .catch((err) => console.error(err));
+    },
 };

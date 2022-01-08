@@ -15,7 +15,7 @@ const useStyles = makeStyles((theme) => ({
     },
     drawer: {
         width: 'calc(var(--drawer-width) - 2rem)',
-        backgroundColor: 'var(--main-bg)',
+        backgroundColor: 'transparent',
         borderRightColor: 'var(--main-color)',
         justifyContent: 'center',
         alignItems: 'center',

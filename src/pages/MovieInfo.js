@@ -37,16 +37,39 @@ const MovieInfo = () => {
     const [movie, setMovie] = useState({});
     const [video, setVideo] = useState({});
     const [isOpen, setOpen] = useState(false);
+    const [backgroundImg, setBackgroundImg] = useState({});
     useEffect(async () => {
-        const detail = await API.getMovieInfo(movieID);
-        let { results: tailer } = await API.getVideo(movieID);
-        console.log(tailer);
-        setMovie(detail);
-        setVideo(tailer[0]);
+        const movieResponse = await API.getMovieInfo(movieID);
+        setMovie(movieResponse);
+
+        const { results: videoResponse } = await API.getVideo(movieID);
+        setVideo(videoResponse.find((v) => v.type === 'Teaser' || v.type === 'Trailer'));
+
+        const imgResponse = await API.getImage(movieID);
+        const { backdrops } = imgResponse;
+        setBackgroundImg(backdrops.find((i) => i.height * 1 >= 1080));
     }, [location]);
 
     return (
-        <Grid container spacing={4} className={classes.container}>
+        <Grid
+            container
+            spacing={4}
+            className={classes.container}
+            sx={{
+                borderRadius: '2rem',
+            }}
+        >
+            <Box
+                sx={{
+                    position: 'fixed',
+                    top: '0',
+                    right: '0',
+                    width: '100%',
+                    height: '100%',
+                    zIndex: '-1',
+                    background: `linear-gradient(var(--second-bg),var(--main-bg)),url('${IMG_URL}${backgroundImg.file_path}') no-repeat center / cover`,
+                }}
+            />
             <Grid item xs={4}>
                 <Box>
                     {/* <img

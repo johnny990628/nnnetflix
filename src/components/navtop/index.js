@@ -1,6 +1,17 @@
 import React, { useState } from 'react';
 
-import { IconButton, Avatar, Badge, AppBar, Toolbar, InputBase, Typography, useMediaQuery, Box } from '@mui/material';
+import {
+    IconButton,
+    Avatar,
+    Badge,
+    AppBar,
+    Toolbar,
+    InputBase,
+    Typography,
+    useMediaQuery,
+    Box,
+    useScrollTrigger,
+} from '@mui/material';
 import { Search, Email, Notifications, Menu } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 
@@ -38,15 +49,25 @@ const styles = {
 
 const Navtop = ({ openDrawer }) => {
     const theme = useTheme();
-    const isPhone = useMediaQuery(theme.breakpoints.down('sm'));
+    const isPhone = useMediaQuery(theme.breakpoints.down('md'));
+    const trigger = useScrollTrigger();
 
     return (
-        <AppBar elevation={0} position="fixed" sx={{ backgroundColor: 'var(--main-bg)' }}>
+        <AppBar
+            elevation={0}
+            position="fixed"
+            sx={{ backgroundColor: trigger ? 'var(--navbar-color)' : 'transparent' }}
+        >
             <Toolbar sx={styles.toolbar}>
                 <Box sx={{ display: 'flex' }}>
-                    <IconButton sx={styles.iconBtn} onClick={openDrawer}>
-                        <Menu />
-                    </IconButton>
+                    {isPhone ? (
+                        <IconButton sx={styles.iconBtn} onClick={openDrawer}>
+                            <Menu />
+                        </IconButton>
+                    ) : (
+                        <Box />
+                    )}
+
                     {/* <Typography variant="h5">NNNETFLIX</Typography> */}
                 </Box>
                 {!isPhone && <SearchBar type={'bar'} />}
