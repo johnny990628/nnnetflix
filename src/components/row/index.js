@@ -7,15 +7,7 @@ import Slider from 'react-slick';
 import API, { IMG_URL } from '../../api/api';
 
 import MovieCard from '../moviecard';
-
-const useStyles = makeStyles((theme) => ({
-    title: {
-        margin: '1rem 0',
-        fontSize: '2.6rem',
-        [theme.breakpoints.up('sm')]: { fontSize: '3rem' },
-        [theme.breakpoints.up('md')]: { fontSize: '3.5rem' },
-    },
-}));
+import ActorCard from '../actorcard';
 
 const Arrow = ({ className, style, onClick, isLeft }) => {
     return (
@@ -68,23 +60,13 @@ const settings = {
     ],
 };
 
-const Row = ({ title, type }) => {
-    const bpStyles = useStyles();
-    const [movie, setMovie] = useState([]);
-    useEffect(async () => {
-        const movies = await API.getMovie(type);
-        setMovie(movies);
-    }, []);
-
+const Row = ({ data, type = 'movie' }) => {
     return (
-        <Box>
-            <Typography className={bpStyles.title}>{title}</Typography>
-            <Slider {...settings}>
-                {movie.map((item) => {
-                    return <MovieCard item={item} />;
-                })}
-            </Slider>
-        </Box>
+        <Slider {...settings}>
+            {data.map((item) => {
+                return type === 'movie' ? <MovieCard item={item} /> : <ActorCard item={item} />;
+            })}
+        </Slider>
     );
 };
 

@@ -2,9 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Skeleton, Typography, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { PlayArrow } from '@mui/icons-material';
 import { IMG_URL } from '../../api/api';
-import Modal from '../modal';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -43,9 +41,8 @@ const useStyles = makeStyles((theme) => ({
     title: {
         color: 'var(--text-color)',
         margin: '.5rem',
-        fontSize: '2rem',
-        [theme.breakpoints.down('md')]: { fontSize: '1.2rem' },
-        [theme.breakpoints.down('sm')]: { fontSize: '1rem' },
+        fontSize: '1.2rem',
+        [theme.breakpoints.up('md')]: { fontSize: '1.2rem' },
     },
     text: {
         color: 'var(--text-color)',
@@ -53,53 +50,45 @@ const useStyles = makeStyles((theme) => ({
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
         margin: '.5rem',
-        fontSize: '1.2rem',
-        [theme.breakpoints.down('md')]: { fontSize: '1rem' },
-        [theme.breakpoints.down('sm')]: { fontSize: '.8rem' },
+        fontSize: '.5rem',
+        [theme.breakpoints.up('md')]: { fontSize: '.8rem' },
     },
 }));
 
-const MovieCard = ({ item }) => {
+const ActorCard = ({ item }) => {
     const classes = useStyles();
-    const location = useLocation();
 
     const [loading, setLoading] = useState(true);
 
     return (
-        <Link to={`/movie/${item.id}`}>
-            <Card
-                className={classes.container}
-                elevation={0}
-                // onClick={() => handleModal(true)}
-            >
+        <Box>
+            <Card className={classes.container} elevation={0}>
                 <Box>
                     {/* {loading && <Skeleton sx={{ height: '35vw' }} />} */}
                     <CardMedia
                         component="img"
-                        src={`${IMG_URL}${item.poster_path || item.backdrop_path}`}
-                        alt={item.title}
+                        src={`${IMG_URL}${item.profile_path}`}
+                        alt={item.name}
                         loading="lazy"
                         className={classes.img}
                         onLoad={() => {
                             setLoading(false);
                         }}
+                        onError={({ currentTarget }) => {
+                            currentTarget.onerror = null;
+                            currentTarget.src =
+                                'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4SYTH5FdB0dAORV98Nwg3llgVnY.jpg';
+                        }}
                     />
 
-                    {location.pathname.includes('movie') ? (
-                        <Box className={['overlay', classes.overlay]} sx={{ alignItems: 'center' }}>
-                            <PlayArrow sx={{ fontSize: '5rem' }} />
-                        </Box>
-                    ) : (
-                        <Box className={['overlay', classes.overlay]}>
-                            <Typography className={classes.title}>{item.title}</Typography>
-                            <Typography className={classes.text}>{item.release_date}</Typography>
-                            <Typography className={classes.text}>{item.overview}</Typography>
-                        </Box>
-                    )}
+                    <Box className={['overlay', classes.overlay]}>
+                        <Typography className={classes.title}>{item.character}</Typography>
+                        <Typography className={classes.text}>{item.name}</Typography>
+                    </Box>
                 </Box>
             </Card>
-        </Link>
+        </Box>
     );
 };
 
-export default MovieCard;
+export default ActorCard;

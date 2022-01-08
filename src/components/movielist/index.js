@@ -21,9 +21,9 @@ const useStyles = makeStyles((theme) => ({
     },
     title: {
         margin: '1rem 0',
-        fontSize: '2.6rem',
-        [theme.breakpoints.up('sm')]: { fontSize: '3rem' },
-        [theme.breakpoints.up('md')]: { fontSize: '3.5rem' },
+        fontSize: '2.4rem',
+        [theme.breakpoints.up('sm')]: { fontSize: '2.8rem' },
+        [theme.breakpoints.up('md')]: { fontSize: '3rem' },
     },
 }));
 

@@ -1,11 +1,20 @@
 import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Button, Box, Drawer, List, ListItem, ListItemIcon, ListItemText, Typography } from '@mui/material';
-import { Home } from '@mui/icons-material';
+import {
+    Home,
+    HomeOutlined,
+    LocalFireDepartmentOutlined,
+    ManageSearch,
+    FormatListBulleted,
+    Settings,
+} from '@mui/icons-material';
 import { makeStyles } from '@mui/styles';
 import sidebarItems from '../../assets/JsonData/sidebar.json';
+import Logo from '../../assets/logo.png';
 
 const useStyles = makeStyles((theme) => ({
+    logo: { position: 'fixed', top: '1rem', left: '1rem' },
     item: {
         color: 'var(--text-color)',
         '&.active': {
@@ -27,11 +36,16 @@ const useStyles = makeStyles((theme) => ({
     text: {
         textTransform: 'capitalize',
         fontSize: '1rem',
-        margin: '0 2rem',
     },
     link: {
         textDecoration: 'none',
         color: 'var(--text-color)',
+        width: '2rem',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '1rem',
     },
 }));
 
@@ -47,11 +61,35 @@ const LeftDrawer = ({ isOpen, isComputer, setDrawer }) => {
             open={isOpen}
             onClose={() => setDrawer(false)}
         >
+            {isComputer && (
+                <Link to={'/'}>
+                    <img src={Logo} width={200} className={classes.logo} />
+                </Link>
+            )}
             <List>
                 {sidebarItems.map((item, index) => {
                     return (
                         <ListItem button disableRipple key={item.display_name}>
                             <Link to={item.route} className={classes.link}>
+                                {item.name === 'home' && (
+                                    <HomeOutlined className={`${classes.item} ${index === activeItem && 'active'}`} />
+                                )}
+                                {item.name === 'popular' && (
+                                    <LocalFireDepartmentOutlined
+                                        className={`${classes.item} ${index === activeItem && 'active'}`}
+                                    />
+                                )}
+                                {item.name === 'discover' && (
+                                    <ManageSearch className={`${classes.item} ${index === activeItem && 'active'}`} />
+                                )}
+                                {item.name === 'categories' && (
+                                    <FormatListBulleted
+                                        className={`${classes.item} ${index === activeItem && 'active'}`}
+                                    />
+                                )}
+                                {item.name === 'setting' && (
+                                    <Settings className={`${classes.item} ${index === activeItem && 'active'}`} />
+                                )}
                                 <ListItemText
                                     primary={item.display_name}
                                     className={`${classes.item} ${index === activeItem && 'active'}`}

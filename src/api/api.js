@@ -71,4 +71,14 @@ export default {
             .then((res) => res.data)
             .catch((err) => console.error(err));
     },
+    getActor: (movieid) => {
+        return axios
+            .get(`${BASE_URL}/movie/${movieid}/credits`, {
+                params: {
+                    api_key: TMDB_API_KEY,
+                },
+            })
+            .then((res) => res.data.cast)
+            .catch((err) => console.error(err));
+    },
 };

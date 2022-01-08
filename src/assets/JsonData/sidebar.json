@@ -1,22 +1,27 @@
 [
     {
-        "display_name": "Home",
+        "display_name": "首頁",
+        "name": "home",
         "route": "/"
     },
     {
-        "display_name": "Popular",
+        "display_name": "流行",
+        "name": "popular",
         "route": "/popular"
     },
     {
-        "display_name": "Discover",
+        "display_name": "搜尋",
+        "name": "discover",
         "route": "/discover"
     },
     {
-        "display_name": "Categories",
+        "display_name": "分類",
+        "name": "categories",
         "route": "/categories"
     },
     {
-        "display_name": "Setting",
+        "display_name": "設定",
+        "name": "setting",
         "route": "/setting"
     }
 ]
