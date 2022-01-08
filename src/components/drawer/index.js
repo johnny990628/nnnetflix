@@ -7,18 +7,18 @@ import sidebarItems from '../../assets/JsonData/sidebar.json';
 
 const useStyles = makeStyles((theme) => ({
     item: {
-        fontSize: '26px',
         color: 'var(--text-color)',
         '&.active': {
             color: 'var(--main-color)',
         },
     },
     drawer: {
-        width: 'calc(var(--drawer-width) - 2rem)',
+        width: 'var(--drawer-width)',
         backgroundColor: 'transparent',
         borderRightColor: 'var(--main-color)',
         justifyContent: 'center',
         alignItems: 'center',
+        overflow: 'hidden',
     },
     mobileDrawer: {
         backgroundColor: 'var(--main-bg)',
@@ -26,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     },
     text: {
         textTransform: 'capitalize',
-        fontSize: '1.3rem',
+        fontSize: '1rem',
         margin: '0 2rem',
     },
     link: {

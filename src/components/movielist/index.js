@@ -20,10 +20,10 @@ const useStyles = makeStyles((theme) => ({
         },
     },
     title: {
-        margin: theme.spacing(3),
-        fontSize: '1.5rem',
-        [theme.breakpoints.up('sm')]: { fontSize: '2rem' },
-        [theme.breakpoints.up('md')]: { fontSize: '2.5rem' },
+        margin: '1rem 0',
+        fontSize: '2.6rem',
+        [theme.breakpoints.up('sm')]: { fontSize: '3rem' },
+        [theme.breakpoints.up('md')]: { fontSize: '3.5rem' },
     },
 }));
 

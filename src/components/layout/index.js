@@ -40,9 +40,9 @@ const Layout = () => {
                 <Drawer isOpen={drawer} isComputer={isComputer} setDrawer={setDrawer} />
                 <Box
                     sx={{
-                        width: 'calc(90% - var(--drawer-width))',
-                        margin: '6rem 0 2.5rem 4rem',
-                        padding: '1rem',
+                        width: isComputer ? 'calc(92% - var(--drawer-width))' : '90%',
+                        margin: isComputer ? '2rem 3rem' : '2rem',
+                        padding: '1.5rem',
                     }}
                 >
                     <Router />

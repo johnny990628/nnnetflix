@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Skeleton, Typography, Button } from '@mui/material';
+import { makeStyles } from '@mui/styles';
 import { PlayArrow } from '@mui/icons-material';
 import { IMG_URL } from '../../api/api';
 import Modal from '../modal';
 
-const styles = {
+const useStyles = makeStyles((theme) => ({
     container: {
         position: 'relative',
         maxWidth: 'calc(100% - 1rem)',
@@ -42,6 +43,9 @@ const styles = {
     title: {
         color: 'var(--text-color)',
         margin: '.5rem',
+        fontSize: '2rem',
+        [theme.breakpoints.down('md')]: { fontSize: '1.2rem' },
+        [theme.breakpoints.down('sm')]: { fontSize: '1rem' },
     },
     text: {
         color: 'var(--text-color)',
@@ -49,10 +53,14 @@ const styles = {
         whiteSpace: 'nowrap',
         textOverflow: 'ellipsis',
         margin: '.5rem',
+        fontSize: '1.2rem',
+        [theme.breakpoints.down('md')]: { fontSize: '1rem' },
+        [theme.breakpoints.down('sm')]: { fontSize: '.8rem' },
     },
-};
+}));
 
 const MovieCard = ({ item }) => {
+    const classes = useStyles();
     const location = useLocation();
     const [openModal, setOpenModal] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -64,7 +72,7 @@ const MovieCard = ({ item }) => {
     return (
         <Link to={`/movie/${item.id}`}>
             <Card
-                sx={styles.container}
+                className={classes.container}
                 elevation={0}
                 // onClick={() => handleModal(true)}
             >
@@ -75,23 +83,21 @@ const MovieCard = ({ item }) => {
                         src={`${IMG_URL}${item.poster_path || item.backdrop_path}`}
                         alt={item.title}
                         loading="lazy"
-                        sx={styles.img}
+                        className={classes.img}
                         onLoad={() => {
                             setLoading(false);
                         }}
                     />
 
                     {location.pathname.includes('movie') ? (
-                        <Box className="overlay" sx={[styles.overlay, { alignItems: 'center' }]}>
+                        <Box className={['overlay', classes.overlay]} sx={{ alignItems: 'center' }}>
                             <PlayArrow sx={{ fontSize: '5rem' }} />
                         </Box>
                     ) : (
-                        <Box className="overlay" sx={styles.overlay}>
-                            <Typography variant="h5" sx={styles.title}>
-                                {item.title}
-                            </Typography>
-                            <Typography sx={styles.text}>{item.release_date}</Typography>
-                            <Typography sx={styles.text}>{item.overview}</Typography>
+                        <Box className={['overlay', classes.overlay]}>
+                            <Typography className={classes.title}>{item.title}</Typography>
+                            <Typography className={classes.text}>{item.release_date}</Typography>
+                            <Typography className={classes.text}>{item.overview}</Typography>
                         </Box>
                     )}
                 </Box>

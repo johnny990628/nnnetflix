@@ -7,7 +7,7 @@
     --navbar-color: rgba(28, 28, 40);
     --searchbar-color: #2d2d42;
     --searchbar-color-hover: #3f3f5a;
-    --drawer-width: 16%;
+    --drawer-width: 8rem;
 }
 
 * {
