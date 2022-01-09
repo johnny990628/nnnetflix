@@ -1,4 +1,4 @@
-import { Box, Grid, Typography, Chip, Divider } from '@mui/material';
+import { Box, Grid, Typography, Chip } from '@mui/material';
 import React, { useEffect, useState } from 'react';
 import ModalVideo from 'react-modal-video';
 

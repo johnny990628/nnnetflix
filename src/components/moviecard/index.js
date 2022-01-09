@@ -2,6 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Skeleton, Typography, Button } from '@mui/material';
 import { motion } from 'framer-motion';
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
+
 import { makeStyles } from '@mui/styles';
 import { PlayArrow } from '@mui/icons-material';
 import { IMG_URL } from '../../api/api';
@@ -70,7 +73,12 @@ const MovieCard = ({ item }) => {
     const location = useLocation();
 
     return (
-        <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+        <motion.div
+            exit={{ opacity: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.5 }}
+        >
             <Link to={`/movie/${item.id}`}>
                 <Card
                     className={classes.container}
@@ -78,11 +86,11 @@ const MovieCard = ({ item }) => {
                     // onClick={() => handleModal(true)}
                 >
                     <Box>
-                        <img
+                        <LazyLoadImage
                             src={`${IMG_URL}${item.poster_path || item.backdrop_path}`}
                             alt={item.title}
                             className={classes.img}
-                            loading="lazy"
+                            effect="blur"
                         />
 
                         {location.pathname.includes('movie') ? (
