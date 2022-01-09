@@ -2,7 +2,8 @@ const axios = require('axios');
 
 export const TMDB_API_KEY = '9636f0e0bb8c73fea7087a16c78597c1';
 export const BASE_URL = 'https://api.themoviedb.org/3';
-export const IMG_URL = 'https://image.tmdb.org/t/p/original';
+export const IMG_URL = 'https://image.tmdb.org/t/p/w500';
+export const IMG_URL_BG = 'https://image.tmdb.org/t/p/w780';
 export const IMG_URL_SM = 'https://image.tmdb.org/t/p/w45';
 export default {
     getMovie: (type, page = 1) => {

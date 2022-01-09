@@ -35,7 +35,7 @@ const Home = () => {
                 return (
                     <Box>
                         <Typography className={classes.title}>{title}</Typography>
-                        <Row data={data} />
+                        <Row key={title} data={data} />
                     </Box>
                 );
             })}

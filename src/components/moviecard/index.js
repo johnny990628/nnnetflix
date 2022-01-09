@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Skeleton, Typography, Button } from '@mui/material';
+import { motion } from 'framer-motion';
 import { makeStyles } from '@mui/styles';
 import { PlayArrow } from '@mui/icons-material';
 import { IMG_URL } from '../../api/api';
@@ -13,18 +14,21 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         alignItems: 'flex-end',
         backgroundColor: 'transparent',
-        transition: 'all .5s ease-out',
+        transition: 'transform .5s ease-out',
         '&:hover': {
             transform: 'scale(1.02)',
             opacity: 1,
             cursor: 'pointer',
             '& .overlay': {
                 top: '0',
+                opacity: '1',
             },
         },
     },
     img: {
         borderRadius: '2rem',
+        width: '100%',
+        height: '100%',
     },
     overlay: {
         position: 'absolute',
@@ -39,6 +43,8 @@ const useStyles = makeStyles((theme) => ({
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
+        opacity: '0',
+        transition: 'opacity .3s .3s ease-out',
     },
     title: {
         color: 'var(--text-color)',
@@ -63,42 +69,37 @@ const MovieCard = ({ item }) => {
     const classes = useStyles();
     const location = useLocation();
 
-    const [loading, setLoading] = useState(true);
-
     return (
-        <Link to={`/movie/${item.id}`}>
-            <Card
-                className={classes.container}
-                elevation={0}
-                // onClick={() => handleModal(true)}
-            >
-                <Box>
-                    {/* {loading && <Skeleton sx={{ height: '35vw' }} />} */}
-                    <CardMedia
-                        component="img"
-                        src={`${IMG_URL}${item.poster_path || item.backdrop_path}`}
-                        alt={item.title}
-                        loading="lazy"
-                        className={classes.img}
-                        onLoad={() => {
-                            setLoading(false);
-                        }}
-                    />
+        <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
+            <Link to={`/movie/${item.id}`}>
+                <Card
+                    className={classes.container}
+                    elevation={0}
+                    // onClick={() => handleModal(true)}
+                >
+                    <Box>
+                        <img
+                            src={`${IMG_URL}${item.poster_path || item.backdrop_path}`}
+                            alt={item.title}
+                            className={classes.img}
+                            loading="lazy"
+                        />
 
-                    {location.pathname.includes('movie') ? (
-                        <Box className={['overlay', classes.overlay]} sx={{ alignItems: 'center' }}>
-                            <PlayArrow sx={{ fontSize: '5rem' }} />
-                        </Box>
-                    ) : (
-                        <Box className={['overlay', classes.overlay]}>
-                            <Typography className={classes.title}>{item.title}</Typography>
-                            <Typography className={classes.text}>{item.release_date}</Typography>
-                            <Typography className={classes.text}>{item.overview}</Typography>
-                        </Box>
-                    )}
-                </Box>
-            </Card>
-        </Link>
+                        {location.pathname.includes('movie') ? (
+                            <Box className={['overlay', classes.overlay]} sx={{ alignItems: 'center' }}>
+                                <PlayArrow sx={{ fontSize: '5rem' }} />
+                            </Box>
+                        ) : (
+                            <Box className={['overlay', classes.overlay]}>
+                                <Typography className={classes.title}>{item.title}</Typography>
+                                <Typography className={classes.text}>{item.release_date}</Typography>
+                                <Typography className={classes.text}>{item.overview}</Typography>
+                            </Box>
+                        )}
+                    </Box>
+                </Card>
+            </Link>
+        </motion.div>
     );
 };
 

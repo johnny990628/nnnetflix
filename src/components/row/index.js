@@ -64,7 +64,11 @@ const Row = ({ data, type = 'movie' }) => {
     return (
         <Slider {...settings}>
             {data.map((item) => {
-                return type === 'movie' ? <MovieCard item={item} /> : <ActorCard item={item} />;
+                return type === 'movie' ? (
+                    <MovieCard key={item.id} item={item} />
+                ) : (
+                    <ActorCard key={item.id} item={item} />
+                );
             })}
         </Slider>
     );

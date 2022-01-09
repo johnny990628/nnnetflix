@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Skeleton, Typography, Button } from '@mui/material';
+import { motion } from 'framer-motion';
 import { makeStyles } from '@mui/styles';
 import { IMG_URL } from '../../api/api';
 
@@ -23,6 +24,8 @@ const useStyles = makeStyles((theme) => ({
     },
     img: {
         borderRadius: '2rem',
+        width: '100%',
+        height: '100%',
     },
     overlay: {
         position: 'absolute',
@@ -58,27 +61,15 @@ const useStyles = makeStyles((theme) => ({
 const ActorCard = ({ item }) => {
     const classes = useStyles();
 
-    const [loading, setLoading] = useState(true);
-
     return (
-        <Box>
+        <motion.div exit={{ opacity: 0 }} initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
             <Card className={classes.container} elevation={0}>
                 <Box>
-                    {/* {loading && <Skeleton sx={{ height: '35vw' }} />} */}
-                    <CardMedia
-                        component="img"
+                    <img
                         src={`${IMG_URL}${item.profile_path}`}
                         alt={item.name}
-                        loading="lazy"
                         className={classes.img}
-                        onLoad={() => {
-                            setLoading(false);
-                        }}
-                        onError={({ currentTarget }) => {
-                            currentTarget.onerror = null;
-                            currentTarget.src =
-                                'https://www.themoviedb.org/t/p/w600_and_h900_bestv2/4SYTH5FdB0dAORV98Nwg3llgVnY.jpg';
-                        }}
+                        loading="lazy"
                     />
 
                     <Box className={['overlay', classes.overlay]}>
@@ -87,7 +78,7 @@ const ActorCard = ({ item }) => {
                     </Box>
                 </Box>
             </Card>
-        </Box>
+        </motion.div>
     );
 };
 

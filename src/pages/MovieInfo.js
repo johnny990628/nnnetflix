@@ -5,7 +5,7 @@ import ModalVideo from 'react-modal-video';
 import { StarOutline } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles';
 import { useParams, useLocation } from 'react-router-dom';
-import API, { IMG_URL } from '../api/api';
+import API, { IMG_URL_BG } from '../api/api';
 
 import MovieCard from '../components/moviecard';
 import Row from '../components/row';
@@ -49,16 +49,13 @@ const MovieInfo = () => {
     useEffect(async () => {
         const imgResponse = await API.getImage(movieID);
         const { backdrops } = imgResponse;
-        setBackgroundImg(backdrops.find((i) => i.height * 1 >= 1080));
-
         const movieResponse = await API.getMovieInfo(movieID);
-        setMovie(movieResponse);
-
         const actorResponse = await API.getActor(movieID);
-        console.log(actorResponse);
-        setActor(actorResponse);
-
         const { results: videoResponse } = await API.getVideo(movieID);
+
+        setBackgroundImg(backdrops.find((i) => i.height * 1 >= 1080));
+        setMovie(movieResponse);
+        setActor(actorResponse);
         setVideo(videoResponse.find((v) => v.type === 'Teaser' || v.type === 'Trailer'));
     }, [location]);
 
@@ -71,6 +68,18 @@ const MovieInfo = () => {
                 borderRadius: '2rem',
             }}
         >
+            <Box
+                sx={{
+                    position: 'fixed',
+                    top: '0',
+                    right: '0',
+                    width: '100%',
+                    height: '100%',
+                    zIndex: '-1',
+                    transition: 'opacity 1s ease-in-out',
+                    background: `linear-gradient(var(--second-bg),var(--main-bg)),url('${IMG_URL_BG}${backgroundImg.file_path}') no-repeat center / cover`,
+                }}
+            />
             <Grid item lg={4}>
                 <Box>
                     <Box onClick={() => setOpen(true)}>
@@ -121,17 +130,6 @@ const MovieInfo = () => {
                     </Box>
                 </Grid>
             </Grid>
-            <Box
-                sx={{
-                    position: 'fixed',
-                    top: '0',
-                    right: '0',
-                    width: '100%',
-                    height: '100%',
-                    zIndex: '-1',
-                    background: `linear-gradient(var(--second-bg),var(--main-bg)),url('${IMG_URL}${backgroundImg.file_path}') no-repeat center / cover`,
-                }}
-            />
         </Grid>
     );
 };

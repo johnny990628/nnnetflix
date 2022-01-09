@@ -7,6 +7,7 @@ import Router from '../Router';
 import { useMediaQuery, Box } from '@mui/material';
 import { useTheme } from '@mui/material/styles';
 import { BrowserRouter } from 'react-router-dom';
+
 const Layout = () => {
     const theme = useTheme();
 
