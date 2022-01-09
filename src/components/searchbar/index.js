@@ -132,6 +132,7 @@ const SearchBar = ({ type }) => {
                                     disablePadding
                                     onClick={() => {
                                         setOpen(false);
+                                        setValue('');
                                     }}
                                 >
                                     <ListItemButton sx={{ minHeight: '100px' }}>

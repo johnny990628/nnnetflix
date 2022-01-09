@@ -69,7 +69,7 @@ const LeftDrawer = ({ isOpen, isComputer, setDrawer }) => {
             <List>
                 {sidebarItems.map((item, index) => {
                     return (
-                        <ListItem button disableRipple key={item.display_name}>
+                        <ListItem button disableRipple key={item.display_name} onClick={() => setDrawer(false)}>
                             <Link to={item.route} className={classes.link}>
                                 {item.name === 'home' && (
                                     <HomeOutlined className={`${classes.item} ${index === activeItem && 'active'}`} />
