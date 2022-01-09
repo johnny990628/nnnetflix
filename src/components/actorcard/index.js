@@ -44,7 +44,7 @@ const useStyles = makeStyles((theme) => ({
     title: {
         color: 'var(--text-color)',
         margin: '.5rem',
-        fontSize: '1.2rem',
+        fontSize: '.8rem',
         [theme.breakpoints.up('md')]: { fontSize: '1.2rem' },
     },
     text: {

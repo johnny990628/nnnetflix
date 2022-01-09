@@ -20,7 +20,7 @@ const useStyles = makeStyles((theme) => ({
     searchbar: {
         display: 'flex',
         alignItems: 'center',
-        width: '20%',
+        width: '25rem',
         backgroundColor: 'var(--searchbar-color)',
         '&:hover': {
             backgroundColor: 'var(--searchbar-color-hover)',
@@ -37,6 +37,8 @@ const useStyles = makeStyles((theme) => ({
     popover: {
         minWidth: '20%',
         maxHeight: '60%',
+        backgroundColor: 'var(--searchbar-color)',
+        color: 'var(--text-color)',
     },
     listImg: { marginLeft: '1rem' },
 }));
@@ -53,9 +55,17 @@ const SearchBar = ({ type }) => {
         setValue(e.target.value);
         setOpen(true);
     };
+    const handlePopoverInputChange = (e) => {
+        setValue(e.target.value);
+    };
     const handleClose = () => {
         setAnchorEl(null);
         setOpen(false);
+    };
+
+    const handleClick = (e) => {
+        setAnchorEl(e.currentTarget);
+        setOpen(true);
     };
     useEffect(async () => {
         let results = await API.getSearch(value);
@@ -64,7 +74,38 @@ const SearchBar = ({ type }) => {
     return (
         <>
             {type === 'bar' && (
-                <>
+                <Box className={classes.searchbar}>
+                    <Search sx={{ color: 'var(--text-color)', margin: '0 10px' }} />
+                    <TextField
+                        variant="standard"
+                        InputProps={{
+                            classes: {
+                                input: classes.input,
+                            },
+                        }}
+                        onChange={handleChange}
+                        value={value}
+                    />
+                </Box>
+            )}
+            {type === 'icon' && (
+                <IconButton className={classes.iconBtn} onClick={handleClick}>
+                    <Search />
+                </IconButton>
+            )}
+            <Popover
+                open={open}
+                anchorEl={anchorEl}
+                onClose={handleClose}
+                anchorOrigin={{
+                    vertical: 'bottom',
+                    horizontal: 'left',
+                }}
+                classes={{ paper: classes.popover }}
+                disableAutoFocus={true}
+                disableEnforceFocus={true}
+            >
+                {type === 'icon' && (
                     <Box className={classes.searchbar}>
                         <Search sx={{ color: 'var(--text-color)', margin: '0 10px' }} />
                         <TextField
@@ -74,55 +115,37 @@ const SearchBar = ({ type }) => {
                                     input: classes.input,
                                 },
                             }}
-                            onChange={handleChange}
+                            onChange={handlePopoverInputChange}
                             value={value}
                         />
                     </Box>
-                    <Popover
-                        open={open}
-                        anchorEl={anchorEl}
-                        onClose={handleClose}
-                        anchorOrigin={{
-                            vertical: 'bottom',
-                            horizontal: 'left',
-                        }}
-                        classes={{ paper: classes.popover }}
-                        disableAutoFocus={true}
-                        disableEnforceFocus={true}
-                    >
-                        <List>
-                            {result &&
-                                result.map((item) => {
-                                    return (
-                                        <ListItem
-                                            key={item.id}
-                                            component={Link}
-                                            to={`/movie/${item.id}`}
-                                            button
-                                            disablePadding
-                                            onClick={() => {
-                                                setOpen(false);
-                                            }}
-                                        >
-                                            <ListItemButton sx={{ minHeight: '100px' }}>
-                                                <ListItemText primary={item.title} />
-                                                <img
-                                                    src={`${IMG_URL_SM}${item.poster_path || item.backdrop_path}`}
-                                                    className={classes.listImg}
-                                                />
-                                            </ListItemButton>
-                                        </ListItem>
-                                    );
-                                })}
-                        </List>
-                    </Popover>
-                </>
-            )}
-            {type === 'icon' && (
-                <IconButton className={classes.iconBtn}>
-                    <Search />
-                </IconButton>
-            )}
+                )}
+                <List>
+                    {result &&
+                        result.map((item) => {
+                            return (
+                                <ListItem
+                                    key={item.id}
+                                    component={Link}
+                                    to={`/movie/${item.id}`}
+                                    button
+                                    disablePadding
+                                    onClick={() => {
+                                        setOpen(false);
+                                    }}
+                                >
+                                    <ListItemButton sx={{ minHeight: '100px' }}>
+                                        <ListItemText primary={item.title} />
+                                        <img
+                                            src={`${IMG_URL_SM}${item.poster_path || item.backdrop_path}`}
+                                            className={classes.listImg}
+                                        />
+                                    </ListItemButton>
+                                </ListItem>
+                            );
+                        })}
+                </List>
+            </Popover>
         </>
     );
 };

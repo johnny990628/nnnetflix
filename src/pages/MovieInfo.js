@@ -77,7 +77,9 @@ const MovieInfo = () => {
                     height: '100%',
                     zIndex: '-1',
                     transition: 'opacity 1s ease-in-out',
-                    background: `linear-gradient(var(--second-bg),var(--main-bg)),url('${IMG_URL_BG}${backgroundImg.file_path}') no-repeat center / cover`,
+                    background:
+                        backgroundImg &&
+                        `linear-gradient(var(--second-bg),var(--main-bg)),url('${IMG_URL_BG}${backgroundImg.file_path}') no-repeat center / cover`,
                 }}
             />
             <Grid item lg={4}>
