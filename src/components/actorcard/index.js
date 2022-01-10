@@ -66,7 +66,8 @@ const ActorCard = ({ item }) => {
             exit={{ opacity: 0 }}
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
+            transition={{ duration: 0.2 }}
+            whileTap={{ scale: 0.9 }}
         >
             <Card className={classes.container} elevation={0}>
                 <Box>
