@@ -11,8 +11,8 @@
     },
     {
         "display_name": "搜尋",
-        "name": "discover",
-        "route": "/discover"
+        "name": "search",
+        "route": "/search"
     },
     {
         "display_name": "分類",

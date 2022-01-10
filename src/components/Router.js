@@ -2,7 +2,7 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Popular from "../pages/Popular";
 import Home from "../pages/Home";
-import Discover from "../pages/Discover";
+import Search from "../pages/Search";
 import Categories from "../pages/Categories";
 import Setting from "../pages/Setting";
 import MovieInfo from "../pages/MovieInfo";
@@ -12,7 +12,7 @@ const Router = () => {
     <Routes>
       <Route path="/" element={<Home />} />
       <Route path="/popular" element={<Popular />} />
-      <Route path="/discover" element={<Discover />} />
+      <Route path="/search" element={<Search />} />
       <Route path="/categories" element={<Categories />} />
       <Route path="/setting" element={<Setting />} />
       <Route path="/movie/:movieID" element={<MovieInfo />} />
