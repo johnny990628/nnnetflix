@@ -11,7 +11,10 @@ import MovieCard from '../components/moviecard';
 import Row from '../components/row';
 
 const useStyles = makeStyles((theme) => ({
-    container: { [theme.breakpoints.up('sm')]: { padding: '2rem' }, [theme.breakpoints.up('md')]: { padding: '3rem' } },
+    container: {
+        [theme.breakpoints.up('sm')]: { padding: '2rem' },
+        [theme.breakpoints.up('md')]: { padding: '3rem' },
+    },
     img: {
         width: '100%',
         borderRadius: '2rem',
@@ -60,14 +63,7 @@ const MovieInfo = () => {
     }, [location]);
 
     return (
-        <Grid
-            container
-            spacing={4}
-            className={classes.container}
-            sx={{
-                borderRadius: '2rem',
-            }}
-        >
+        <Grid container spacing={4} className={classes.container}>
             <Box
                 sx={{
                     position: 'fixed',
@@ -76,7 +72,7 @@ const MovieInfo = () => {
                     width: '100%',
                     height: '100%',
                     zIndex: '-1',
-                    transition: 'opacity 1s ease-in-out',
+                    filter: 'blur(4px)',
                     background:
                         backgroundImg &&
                         `linear-gradient(var(--second-bg),var(--main-bg)),url('${IMG_URL_BG}${backgroundImg.file_path}') no-repeat center / cover`,

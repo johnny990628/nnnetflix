@@ -3,7 +3,7 @@ import { Link, useLocation } from 'react-router-dom';
 import { Box, Card, CardContent, CardMedia, Skeleton, Typography, Button } from '@mui/material';
 import { motion } from 'framer-motion';
 import { makeStyles } from '@mui/styles';
-import { IMG_URL } from '../../api/api';
+import { IMG_URL_ACTOR } from '../../api/api';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -71,7 +71,7 @@ const ActorCard = ({ item }) => {
             <Card className={classes.container} elevation={0}>
                 <Box>
                     <img
-                        src={`${IMG_URL}${item.profile_path}`}
+                        src={`${IMG_URL_ACTOR}${item.profile_path}`}
                         alt={item.name}
                         className={classes.img}
                         loading="lazy"

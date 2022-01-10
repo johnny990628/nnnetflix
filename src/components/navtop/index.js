@@ -56,7 +56,11 @@ const Navtop = ({ openDrawer }) => {
         <AppBar
             elevation={0}
             position="fixed"
-            sx={{ backgroundColor: trigger ? 'var(--navbar-color)' : 'transparent' }}
+            sx={
+                trigger
+                    ? { backdropFilter: 'blur(5px)', backgroundColor: 'var(--navbar-color)' }
+                    : { backgroundColor: 'transparent' }
+            }
         >
             <Toolbar sx={styles.toolbar}>
                 <Box sx={{ display: 'flex' }}>
