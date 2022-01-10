@@ -75,6 +75,10 @@ const ActorCard = ({ item }) => {
                         alt={item.name}
                         className={classes.img}
                         loading="lazy"
+                        onError={({ currentTarget }) => {
+                            currentTarget.onerror = null;
+                            currentTarget.src = 'https://image.tmdb.org/t/p/w185/4SYTH5FdB0dAORV98Nwg3llgVnY.jpg';
+                        }}
                     />
 
                     <Box className={['overlay', classes.overlay]}>

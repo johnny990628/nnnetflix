@@ -21,6 +21,9 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('md')]: {
             gridTemplateColumns: 'repeat(4,1fr)',
         },
+        [theme.breakpoints.up('lg')]: {
+            gridTemplateColumns: 'repeat(5,1fr)',
+        },
     },
 }));
 

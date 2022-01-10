@@ -31,6 +31,7 @@ const useStyles = makeStyles((theme) => ({
     input: {
         color: 'var(--text-color)',
         flexGrow: 1,
+        width: '100%',
     },
     iconBtn: { color: 'var(--text-color)', marginRight: '10px' },
     searchButton: { marginRight: '20px' },
@@ -85,6 +86,7 @@ const SearchBar = ({ type }) => {
                                 input: classes.input,
                             },
                         }}
+                        fullWidth
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') {
                                 navigate(`/search?query=${value}`);
@@ -124,7 +126,8 @@ const SearchBar = ({ type }) => {
                                     input: classes.input,
                                 },
                             }}
-                            onKeyDown={handlePopoverInputChange}
+                            fullWidth
+                            onChange={handlePopoverInputChange}
                             value={value}
                         />
                     </Box>

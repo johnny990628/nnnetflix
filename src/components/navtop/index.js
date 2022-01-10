@@ -58,7 +58,7 @@ const Navtop = ({ openDrawer }) => {
             position="fixed"
             sx={
                 trigger
-                    ? { backdropFilter: 'blur(5px)', backgroundColor: 'var(--navbar-color)' }
+                    ? { backdropFilter: 'blur(2px)', backgroundColor: 'var(--navbar-color)' }
                     : { backgroundColor: 'transparent' }
             }
         >
