@@ -49,11 +49,12 @@ const MovieList = ({ type }) => {
 
   const fetchData = async () => {
     try {
-      setPage(page + 1);
       const movieResponse = params
         ? await API.getSearch(params, page)
         : await API.getMovie(type, page);
-      setMovie((prevMovies) => [...prevMovies, ...movieResponse]);
+
+      setMovie([...movie, ...movieResponse]);
+      setPage(page + 1);
     } catch (e) {
       console.log(e);
       setHasMore(false);
