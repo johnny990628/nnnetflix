@@ -24,7 +24,7 @@ const Home = () => {
     const topRatedMovie = await API.getMovie("top_rated");
     setMovie([
       { title: "熱門電影", data: [...popularMovie] },
-      { title: "熱映電影", data: [...nowPlayingMovie] },
+      { title: "熱映中", data: [...nowPlayingMovie] },
       { title: "評分最高", data: [...topRatedMovie] },
     ]);
   }, []);

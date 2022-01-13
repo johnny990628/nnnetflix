@@ -85,8 +85,8 @@ const MovieCard = ({ item }) => {
       exit={{ opacity: 0 }}
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
-      transition={{ duration: 0.2 }}
-      whileTap={{ scale: 0.8 }}
+      transition={{ duration: 0.15 }}
+      whileTap={{ scale: 0.93 }}
     >
       <Link to={`/movie/${item.id}`}>
         <Card

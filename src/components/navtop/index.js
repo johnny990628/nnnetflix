@@ -10,6 +10,7 @@ import {
   Typography,
   useMediaQuery,
   Box,
+  useScrollTrigger,
 } from "@mui/material";
 import { Search, Email, Notifications, Menu } from "@mui/icons-material";
 import { useTheme } from "@mui/material/styles";
@@ -49,15 +50,20 @@ const styles = {
 const Navtop = ({ openDrawer }) => {
   const theme = useTheme();
   const isPhone = useMediaQuery(theme.breakpoints.down("md"));
+  const trigger = useScrollTrigger();
 
   return (
     <AppBar
       elevation={0}
       position="fixed"
-      sx={{
-        backdropFilter: "blur(2px)",
-        backgroundColor: "var(--navbar-color)",
-      }}
+      sx={
+        trigger
+          ? {
+              backdropFilter: "blur(2px)",
+              backgroundColor: "var(--navbar-color)",
+            }
+          : { backgroundColor: "transparent" }
+      }
     >
       <Toolbar sx={styles.toolbar}>
         <Box sx={{ display: "flex" }}>
