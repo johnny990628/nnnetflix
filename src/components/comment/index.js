@@ -6,13 +6,14 @@ import { auth } from '../../firebase';
 
 const useStyles = makeStyles((theme) => ({
     container: {
-        width: '60%',
+        width: '100%',
         display: 'flex',
         backdropFilter: 'blur(5px)',
         backgroundColor: 'var(--second-bg)',
         padding: '1.5rem',
         borderRadius: '1rem',
         margin: '1rem',
+        [theme.breakpoints.up('lg')]: { width: '60%' },
     },
     avatar: {
         marginRight: '1rem',
@@ -23,10 +24,12 @@ const useStyles = makeStyles((theme) => ({
     comment: {},
 
     name: {
-        fontSize: '1.5rem',
+        fontSize: '1.8rem',
+        [theme.breakpoints.up('lg')]: { fontSize: '2rem' },
     },
     content: {
-        fontSize: '1rem',
+        fontSize: '1.2rem',
+        [theme.breakpoints.up('lg')]: { fontSize: '1.3rem' },
     },
 }));
 const Commment = ({ name, comment }) => {
