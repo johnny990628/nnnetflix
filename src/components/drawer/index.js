@@ -6,8 +6,8 @@ import {
     HomeOutlined,
     LocalFireDepartmentOutlined,
     ManageSearch,
-    FormatListBulleted,
-    Settings,
+    StarRateOutlined,
+    AlignVerticalBottomOutlined,
 } from '@mui/icons-material';
 import { makeStyles } from '@mui/styles';
 import sidebarItems from '../../assets/JsonData/sidebar.json';
@@ -75,20 +75,22 @@ const LeftDrawer = ({ isOpen, isComputer, setDrawer }) => {
                                     <HomeOutlined className={`${classes.item} ${index === activeItem && 'active'}`} />
                                 )}
                                 {item.name === 'popular' && (
-                                    <LocalFireDepartmentOutlined
+                                    <StarRateOutlined
                                         className={`${classes.item} ${index === activeItem && 'active'}`}
                                     />
                                 )}
                                 {item.name === 'search' && (
                                     <ManageSearch className={`${classes.item} ${index === activeItem && 'active'}`} />
                                 )}
-                                {item.name === 'categories' && (
-                                    <FormatListBulleted
+                                {item.name === 'nowplaying' && (
+                                    <LocalFireDepartmentOutlined
                                         className={`${classes.item} ${index === activeItem && 'active'}`}
                                     />
                                 )}
-                                {item.name === 'setting' && (
-                                    <Settings className={`${classes.item} ${index === activeItem && 'active'}`} />
+                                {item.name === 'toprated' && (
+                                    <AlignVerticalBottomOutlined
+                                        className={`${classes.item} ${index === activeItem && 'active'}`}
+                                    />
                                 )}
                                 <ListItemText
                                     primary={item.display_name}

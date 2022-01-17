@@ -10,18 +10,18 @@
         "route": "/popular"
     },
     {
+        "display_name": "熱映",
+        "name": "nowplaying",
+        "route": "/nowplaying"
+    },
+    {
+        "display_name": "高分",
+        "name": "toprated",
+        "route": "/toprated"
+    },
+    {
         "display_name": "搜尋",
         "name": "search",
         "route": "/search"
-    },
-    {
-        "display_name": "分類",
-        "name": "categories",
-        "route": "/categories"
-    },
-    {
-        "display_name": "設定",
-        "name": "setting",
-        "route": "/setting"
     }
 ]
