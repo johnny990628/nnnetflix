@@ -1,4 +1,6 @@
 import { initializeApp } from 'firebase/app';
+import { getFirestore, collection, getDocs, setDoc, doc } from 'firebase/firestore/lite';
+
 import { getAuth, signInWithPopup, GoogleAuthProvider } from 'firebase/auth';
 
 const firebaseConfig = {
@@ -11,7 +13,8 @@ const firebaseConfig = {
     measurementId: 'G-P3C584XLB3',
 };
 
-initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
 
 const provider = new GoogleAuthProvider();
 export const auth = getAuth();
@@ -19,7 +22,16 @@ export const SignInWithGoogle = () => {
     return new Promise(async (resolve, reject) => {
         try {
             const user = await signInWithPopup(auth, provider);
-            resolve(user);
+            const { uid, displayName, photoURL, email } = user.user;
+            if (user) {
+                const userRef = collection(db, 'user');
+                await setDoc(doc(userRef, uid), {
+                    userName: displayName,
+                    photoURL,
+                    email,
+                });
+                resolve(user);
+            }
         } catch (err) {
             reject(err);
         }
