@@ -1,18 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography, Avatar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../firebase';
+import { auth } from '../../firebase/auth';
+import { getComments } from '../../firebase/movie';
 
 import Comment from '../comment';
 
 const useStyles = makeStyles((theme) => ({}));
-const CommmentList = ({ name, comment }) => {
-    const [user] = useAuthState(auth);
+const CommmentList = ({ movieID }) => {
+    const [commentData, setCommentData] = useState([]);
+    useEffect(async () => {
+        const commentCollection = await getComments(movieID);
+        setCommentData([...commentCollection]);
+    }, []);
     return (
         <Box>
-            <Comment />
-            <Comment />
+            {commentData.map((data) => (
+                <Comment comment={data} />
+            ))}
         </Box>
     );
 };

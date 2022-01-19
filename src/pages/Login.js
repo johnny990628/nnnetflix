@@ -1,5 +1,5 @@
 import React from 'react';
-import { SignInWithGoogle } from '../firebase';
+import { SignInWithGoogle } from '../firebase/auth';
 import { Box, Button } from '@mui/material';
 
 const Login = () => {

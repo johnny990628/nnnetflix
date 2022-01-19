@@ -17,7 +17,7 @@ import { Google, Menu, Favorite, Bookmark } from '@mui/icons-material';
 import { useTheme } from '@mui/material/styles';
 
 import SearchBar from '../searchbar';
-import { SignInWithGoogle, Logout, auth } from '../../firebase';
+import { SignInWithGoogle, Logout, auth } from '../../firebase/auth';
 
 const styles = {
     toolbar: {

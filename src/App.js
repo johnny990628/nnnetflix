@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import Layout from './components/layout';
 import Login from './pages/Login';
-import { auth } from './firebase';
+import { auth } from './firebase/auth';
 
 const App = () => {
     const [user] = useAuthState(auth);

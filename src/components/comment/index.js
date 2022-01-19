@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Box, Typography, Avatar } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { useAuthState } from 'react-firebase-hooks/auth';
-import { auth } from '../../firebase';
+import { getUser } from '../../firebase/user';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -32,19 +32,21 @@ const useStyles = makeStyles((theme) => ({
         [theme.breakpoints.up('lg')]: { fontSize: '1.3rem' },
     },
 }));
-const Commment = ({ name, comment }) => {
+const Commment = ({ comment }) => {
     const classes = useStyles();
-    const [user] = useAuthState(auth);
+    const [user, setUser] = useState({});
+    useEffect(async () => {
+        const userCollection = await getUser(comment.userID);
+        setUser(userCollection);
+    }, []);
     return (
         <Box className={classes.container}>
             <Box class={classes.avatar}>
-                <Avatar alt={user.displayName} src={user.photoURL} />
+                <Avatar alt={user.userName} src={user.photoURL} />
             </Box>
             <Box className={classes.comment}>
-                <Typography className={classes.name}>{user.displayName}</Typography>
-                <Typography className={classes.content}>
-                    巴斯特和他的藝人們巴斯特和他的藝人們巴斯特和他的藝人們
-                </Typography>
+                <Typography className={classes.name}>{user.userName}</Typography>
+                <Typography className={classes.content}>{comment.content}</Typography>
             </Box>
         </Box>
     );

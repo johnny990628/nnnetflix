@@ -167,7 +167,7 @@ const MovieInfo = () => {
                 </Grid>
                 <Grid>
                     <Typography className={classes.head}>留言</Typography>
-                    <CommentList />
+                    <CommentList movieID={movieID} />
                 </Grid>
             </Grid>
         </Grid>
