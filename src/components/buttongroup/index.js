@@ -5,7 +5,7 @@ import { motion } from 'framer-motion';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase/auth';
-
+import { setComment } from '../../firebase/movie';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -27,13 +27,10 @@ const useStyles = makeStyles((theme) => ({
     },
     input: {
         color: 'var(--text-color)',
-        '&::placeholder': {
-            color: 'var(--text-color)',
-        },
     },
 }));
 
-const ButtonGroup = () => {
+const ButtonGroup = ({ movieID }) => {
     const [like, setLike] = useState(false);
     const [collect, setCollect] = useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
@@ -51,6 +48,13 @@ const ButtonGroup = () => {
         setAnchorEl(null);
         setOpen(false);
     };
+    const handleSubmit = () => {
+        if (value) {
+            setComment(user.uid, movieID, value);
+            setOpen(false);
+        }
+    };
+
     return (
         <>
             <IconButton
@@ -115,7 +119,7 @@ const ButtonGroup = () => {
                         }}
                     />
                     <Box sx={{ marginLeft: '1rem' }}>
-                        <IconButton className={classes.icon} sx={{ color: 'var(--text-color)' }}>
+                        <IconButton className={classes.icon} sx={{ color: 'var(--text-color)' }} onClick={handleSubmit}>
                             <Edit />
                         </IconButton>
                     </Box>

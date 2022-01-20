@@ -107,7 +107,7 @@ const MovieInfo = () => {
                     )}
                 </Box>
                 <Box className={classes.iconlist}>
-                    <ButtonGroup />
+                    <ButtonGroup movieID={movieID} />
                 </Box>
             </Grid>
             <Grid item lg={8}>

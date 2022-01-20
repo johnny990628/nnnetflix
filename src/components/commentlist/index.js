@@ -10,9 +10,12 @@ import Comment from '../comment';
 const useStyles = makeStyles((theme) => ({}));
 const CommmentList = ({ movieID }) => {
     const [commentData, setCommentData] = useState([]);
-    useEffect(async () => {
+    const getCommentData = async () => {
         const commentCollection = await getComments(movieID);
-        setCommentData([...commentCollection]);
+        setCommentData(commentCollection);
+    };
+    useEffect(() => {
+        getCommentData();
     }, []);
     return (
         <Box>
