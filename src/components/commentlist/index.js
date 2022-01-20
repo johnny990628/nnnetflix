@@ -17,13 +17,7 @@ const CommmentList = ({ movieID }) => {
     useEffect(() => {
         getCommentData();
     }, []);
-    return (
-        <Box>
-            {commentData.map((data) => (
-                <Comment comment={data} />
-            ))}
-        </Box>
-    );
+    return <Box>{commentData && commentData.map((data) => <Comment comment={data} />)}</Box>;
 };
 
 export default CommmentList;

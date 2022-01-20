@@ -1,4 +1,5 @@
 import { collection, getDoc, getDocs, setDoc, doc } from 'firebase/firestore/lite';
+
 import { db } from './db';
 
 const usersRef = collection(db, 'user');
