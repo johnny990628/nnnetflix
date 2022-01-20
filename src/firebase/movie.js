@@ -1,8 +1,7 @@
-import { collection, getDoc, setDoc, updateDoc, doc, arrayUnion } from 'firebase/firestore/lite';
-import { onSnapshot } from 'firebase/firestore';
+import { collection, getDoc, setDoc, updateDoc, doc, arrayUnion, onSnapshot } from 'firebase/firestore';
 import { db } from './db';
 
-const commentsRef = collection(db, 'comment');
+export const commentsRef = collection(db, 'comment');
 
 export const getComments = async (movieID) => {
     try {
@@ -16,7 +15,7 @@ export const getComments = async (movieID) => {
 
 export const setComment = async (userID, movieID, content) => {
     const commentSnap = await getDoc(doc(commentsRef, movieID));
-    const comments = [];
+    let comments = [];
     if (commentSnap.data()) comments = commentSnap.data().comment;
 
     await setDoc(doc(commentsRef, movieID), {
