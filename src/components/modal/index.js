@@ -1,47 +1,40 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState, useRef } from 'react';
 import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-} from "@mui/material";
+    Box,
+    Button,
+    Dialog,
+    DialogActions,
+    DialogContent,
+    DialogContentText,
+    DialogTitle,
+    TextareaAutosize,
+} from '@mui/material';
+
+import { makeStyles } from '@mui/styles';
+
+const useStyles = makeStyles((theme) => ({
+    container: {
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+}));
 
 const Modal = ({ open, handleModal }) => {
-  const descriptionElementRef = useRef(null);
-  useEffect(() => {
-    if (open) {
-      const { current: descriptionElement } = descriptionElementRef;
-      if (descriptionElement !== null) {
-        descriptionElement.focus();
-      }
-    }
-  }, [open]);
-
-  return (
-    <div>
-      <Dialog open={open} onClose={() => handleModal(false)} scroll={"paper"}>
-        <DialogTitle>Subscribe</DialogTitle>
-        <DialogContent dividers={true}>
-          <DialogContentText ref={descriptionElementRef} tabIndex={-1}>
-            {[...new Array(50)]
-              .map(
-                () => `Cras mattis consectetur purus sit amet fermentum.
-Cras justo odio, dapibus ac facilisis in, egestas eget quam.
-Morbi leo risus, porta ac consectetur ac, vestibulum at eros.
-Praesent commodo cursus magna, vel scelerisque nisl consectetur et.`
-              )
-              .join("\n")}
-          </DialogContentText>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={() => handleModal(false)}>Cancel</Button>
-          <Button onClick={() => handleModal(false)}>Subscribe</Button>
-        </DialogActions>
-      </Dialog>
-    </div>
-  );
+    const classes = useStyles();
+    return (
+        <Box className={classes.container}>
+            <Dialog open={open} onClose={() => handleModal(false)}>
+                <DialogTitle>留言</DialogTitle>
+                <DialogContent>
+                    <TextareaAutosize minRows={5} placeholder="留下您的評論..." sx={{ width: '20rem' }} />
+                </DialogContent>
+                <DialogActions>
+                    <Button onClick={() => handleModal(false)}>提交</Button>
+                </DialogActions>
+            </Dialog>
+        </Box>
+    );
 };
 
 export default Modal;

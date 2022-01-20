@@ -5,8 +5,10 @@
     --text-color: #ffffff;
     --main-color: #2495ffe7;
     --navbar-color: rgba(28, 28, 40, 0.7);
-    --searchbar-color: #2d2d42;
+    --searchbar-color: #2d2d42f5;
     --searchbar-color-hover: #3f3f5a;
+    --likebutton-color: #e74759;
+    --collectbutton-color: #f4ba05;
     --drawer-width: 8rem;
 }
 

@@ -10,6 +10,7 @@ import API, { IMG_URL_BG } from '../api/api';
 import MovieCard from '../components/moviecard';
 import Row from '../components/row';
 import CommentList from '../components/commentlist';
+import ButtonGroup from '../components/buttongroup';
 
 const useStyles = makeStyles((theme) => ({
     container: {
@@ -43,14 +44,6 @@ const useStyles = makeStyles((theme) => ({
         marginTop: '1rem',
         [theme.breakpoints.up('md')]: { fontSize: '3rem' },
     },
-    icon: {
-        fontSize: '2rem',
-        color: 'var(--text-color)',
-        opacity: '.8',
-        '&:hover': {
-            opacity: '1',
-        },
-    },
     iconlist: {
         display: 'flex',
         justifyContent: 'space-around',
@@ -67,7 +60,8 @@ const MovieInfo = () => {
     const [video, setVideo] = useState({});
     const [backgroundImg, setBackgroundImg] = useState({});
     const [actor, setActor] = useState([]);
-    const [isOpen, setOpen] = useState(false);
+    const [videoOpen, setVideoOpen] = useState(false);
+
     useEffect(async () => {
         const imgResponse = await API.getImage(movieID);
         const { backdrops } = imgResponse;
@@ -99,29 +93,21 @@ const MovieInfo = () => {
             />
             <Grid item lg={4}>
                 <Box>
-                    <Box onClick={() => setOpen(true)}>
+                    <Box onClick={() => setVideoOpen(true)}>
                         <MovieCard item={movie} />
                     </Box>
                     {video && (
                         <ModalVideo
                             channel="youtube"
                             autoplay
-                            isOpen={isOpen}
+                            isOpen={videoOpen}
                             videoId={video.key}
-                            onClose={() => setOpen(false)}
+                            onClose={() => setVideoOpen(false)}
                         />
                     )}
                 </Box>
                 <Box className={classes.iconlist}>
-                    <IconButton>
-                        <Favorite className={classes.icon} />
-                    </IconButton>
-                    <IconButton>
-                        <Bookmark className={classes.icon} />
-                    </IconButton>
-                    <IconButton>
-                        <ChatBubbleOutlined className={classes.icon} />
-                    </IconButton>
+                    <ButtonGroup />
                 </Box>
             </Grid>
             <Grid item lg={8}>
