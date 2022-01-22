@@ -111,12 +111,12 @@ const Navtop = ({ openDrawer }) => {
                     {isPhone && <SearchBar type={'icon'} />}
                     {user && (
                         <>
-                            <IconButton component={Link} to={'/like'} sx={styles.iconBtn}>
+                            <IconButton component={Link} to={'/favorite'} sx={styles.iconBtn}>
                                 <Badge badgeContent={like} color="primary">
                                     <Favorite />
                                 </Badge>
                             </IconButton>
-                            <IconButton component={Link} to={'/collect'} sx={styles.iconBtn}>
+                            <IconButton component={Link} to={'/collection'} sx={styles.iconBtn}>
                                 <Badge badgeContent={collect} color="primary">
                                     <Bookmark />
                                 </Badge>
