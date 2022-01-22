@@ -34,15 +34,19 @@ export const getCurrentCollectList = async (userID) => {
 };
 
 export const setLikeList = async (userID, movieID) => {
-    const likes = await getCurrentLikeList(userID);
+    let likes = await getCurrentLikeList(userID);
+    // if exist delete it else add it
+    likes.includes(movieID) ? likes.splice(likes.indexOf(movieID), 1) : likes.push(movieID);
     await updateDoc(doc(usersRef, userID), {
-        like: [...likes, movieID],
+        like: likes,
     });
 };
 export const setCollectList = async (userID, movieID) => {
-    const collects = await getCurrentCollectList(userID);
+    let collects = await getCurrentCollectList(userID);
+    // if exist delete it else add it
+    collects.includes(movieID) ? collects.splice(collects.indexOf(movieID), 1) : collects.push(movieID);
     await updateDoc(doc(usersRef, userID), {
-        collect: [...collects, movieID],
+        collect: collects,
     });
 };
 

@@ -50,11 +50,11 @@ const ButtonGroup = ({ movieID }) => {
     }, []);
 
     const handleClick = (type) => {
-        if (type === 'like') {
-            setLike(true);
+        if (type === 'favorite') {
+            setLike(!like);
             setLikeList(user.uid, movieID);
-        } else if (type === 'collect') {
-            setCollect(true);
+        } else if (type === 'collection') {
+            setCollect(!collect);
             setCollectList(user.uid, movieID);
         }
     };
@@ -94,8 +94,7 @@ const ButtonGroup = ({ movieID }) => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.15 }}
                 whileTap={{ scale: 0.75 }}
-                onClick={() => handleClick('like')}
-                disabled={like}
+                onClick={() => handleClick('favorite')}
             >
                 <Favorite
                     className={classes.icon}
@@ -109,8 +108,7 @@ const ButtonGroup = ({ movieID }) => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.15 }}
                 whileTap={{ scale: 0.75 }}
-                onClick={() => handleClick('collect')}
-                disabled={collect}
+                onClick={() => handleClick('collection')}
             >
                 <Bookmark
                     className={classes.icon}

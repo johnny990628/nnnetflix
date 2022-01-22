@@ -52,7 +52,7 @@ const Favorite = () => {
     return (
         <Box>
             <Typography className={classes.title}>
-                {location.pathname === '/favorite' ? '我的最愛' : '我的收藏'}
+                {location.pathname === '/favorite' ? '我的最愛' : '我的片單'}
             </Typography>
             <Box className={classes.container}>
                 {list.map((item) => (
