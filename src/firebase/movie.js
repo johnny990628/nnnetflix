@@ -15,7 +15,7 @@ export const getComments = async (movieID) => {
 
 export const setComment = async (userID, movieID, content) => {
     const commentSnap = await getDoc(doc(commentsRef, movieID));
-    const comments = commentSnap.data().comment ? commentSnap.data().comment : [];
+    const comments = commentSnap.data() ? commentSnap.data().comment : [];
 
     await setDoc(doc(commentsRef, movieID), {
         comment: [
