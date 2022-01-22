@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Box, IconButton, Popover, TextField, Avatar } from '@mui/material';
+import { Box, IconButton, Popover, TextField, Avatar, Alert, Snackbar } from '@mui/material';
 import { Favorite, ChatBubbleOutlined, Bookmark, Edit } from '@mui/icons-material';
 import { motion } from 'framer-motion';
 
 import { useAuthState } from 'react-firebase-hooks/auth';
 import { auth } from '../../firebase/auth';
 import { setComment } from '../../firebase/movie';
+import { setLikeList, setCollectList, isLike, isCollect } from '../../firebase/user';
 import { makeStyles } from '@mui/styles';
 
 const useStyles = makeStyles((theme) => ({
@@ -35,18 +36,47 @@ const ButtonGroup = ({ movieID }) => {
     const [collect, setCollect] = useState(false);
     const [anchorEl, setAnchorEl] = React.useState(null);
     const [open, setOpen] = useState(false);
+    const [alert, setAlert] = useState(false);
     const [value, setValue] = useState('');
 
     const [user] = useAuthState(auth);
     const classes = useStyles();
 
+    useEffect(async () => {
+        if (user) {
+            if (await isLike(user.uid, movieID)) setLike(true);
+            if (await isCollect(user.uid, movieID)) setCollect(true);
+        }
+    }, []);
+
+    const handleClick = (type) => {
+        if (type === 'like') {
+            setLike(true);
+            setLikeList(user.uid, movieID);
+        } else if (type === 'collect') {
+            setCollect(true);
+            setCollectList(user.uid, movieID);
+        }
+    };
+
     const handleOpen = (e) => {
-        setAnchorEl(e.currentTarget);
-        setOpen(true);
+        if (user) {
+            setAnchorEl(e.currentTarget);
+            setOpen(true);
+        } else {
+            setAlert(true);
+        }
     };
     const handleClose = () => {
         setAnchorEl(null);
         setOpen(false);
+    };
+
+    const handleAlertClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setAlert(false);
     };
     const handleSubmit = () => {
         if (value) {
@@ -64,9 +94,8 @@ const ButtonGroup = ({ movieID }) => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.15 }}
                 whileTap={{ scale: 0.75 }}
-                onClick={() => {
-                    setLike(true);
-                }}
+                onClick={() => handleClick('like')}
+                disabled={like}
             >
                 <Favorite
                     className={classes.icon}
@@ -80,9 +109,8 @@ const ButtonGroup = ({ movieID }) => {
                 animate={{ opacity: 1 }}
                 transition={{ duration: 0.15 }}
                 whileTap={{ scale: 0.75 }}
-                onClick={() => {
-                    setCollect(true);
-                }}
+                onClick={() => handleClick('collect')}
+                disabled={collect}
             >
                 <Bookmark
                     className={classes.icon}
@@ -109,13 +137,16 @@ const ButtonGroup = ({ movieID }) => {
                         fullWidth
                         label={user && user.displayName}
                         value={value}
-                        onChange={(e) => {
-                            setValue(e.target.value);
-                        }}
                         InputProps={{
                             classes: {
                                 input: classes.input,
                             },
+                        }}
+                        onChange={(e) => {
+                            setValue(e.target.value);
+                        }}
+                        onKeyDown={(e) => {
+                            if (e.key === 'Enter') handleSubmit();
                         }}
                     />
                     <Box sx={{ marginLeft: '1rem' }}>
@@ -125,6 +156,16 @@ const ButtonGroup = ({ movieID }) => {
                     </Box>
                 </Box>
             </Popover>
+            <Snackbar
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                open={alert}
+                autoHideDuration={6000}
+                onClose={handleAlertClose}
+            >
+                <Alert onClose={handleAlertClose} severity="success" sx={{ width: '100%' }}>
+                    請先登入喔~
+                </Alert>
+            </Snackbar>
         </>
     );
 };

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { useAuthState } from 'react-firebase-hooks/auth';
 import {
     IconButton,
@@ -18,6 +18,9 @@ import { useTheme } from '@mui/material/styles';
 
 import SearchBar from '../searchbar';
 import { SignInWithGoogle, Logout, auth } from '../../firebase/auth';
+import { onSnapshot, doc } from 'firebase/firestore';
+import { usersRef } from '../../firebase/user';
+import { useEffect } from 'react';
 
 const styles = {
     toolbar: {
@@ -36,10 +39,23 @@ const styles = {
 const Navtop = ({ openDrawer }) => {
     const theme = useTheme();
     const isPhone = useMediaQuery(theme.breakpoints.down('md'));
+    const location = useLocation();
     const trigger = useScrollTrigger();
     const [open, setOpen] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
+    const [like, setLike] = useState(0);
+    const [collect, setCollect] = useState(0);
     const [user] = useAuthState(auth);
+
+    useEffect(async () => {
+        if (user) {
+            return onSnapshot(doc(usersRef, user.uid), (doc) => {
+                if (doc.data().like) setLike(doc.data().like.length);
+                if (doc.data().collect) setCollect(doc.data().collect.length);
+            });
+        }
+    }, [user]);
+
     const handleSignin = () => {
         SignInWithGoogle().then((user) => {
             if (user) {
@@ -93,16 +109,20 @@ const Navtop = ({ openDrawer }) => {
 
                 <Box sx={styles.icons}>
                     {isPhone && <SearchBar type={'icon'} />}
-                    <IconButton component={Link} to={'/like'} sx={styles.iconBtn}>
-                        <Badge badgeContent={4} color="primary">
-                            <Favorite />
-                        </Badge>
-                    </IconButton>
-                    <IconButton component={Link} to={'/save'} sx={styles.iconBtn}>
-                        <Badge badgeContent={6} color="primary">
-                            <Bookmark />
-                        </Badge>
-                    </IconButton>
+                    {user && (
+                        <>
+                            <IconButton component={Link} to={'/like'} sx={styles.iconBtn}>
+                                <Badge badgeContent={like} color="primary">
+                                    <Favorite />
+                                </Badge>
+                            </IconButton>
+                            <IconButton component={Link} to={'/collect'} sx={styles.iconBtn}>
+                                <Badge badgeContent={collect} color="primary">
+                                    <Bookmark />
+                                </Badge>
+                            </IconButton>
+                        </>
+                    )}
                     {user ? (
                         <IconButton sx={styles.iconBtn} onClick={handleLogout}>
                             <Avatar alt={user.displayName} src={user.photoURL} />
