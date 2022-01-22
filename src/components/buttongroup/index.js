@@ -50,12 +50,16 @@ const ButtonGroup = ({ movieID }) => {
     }, []);
 
     const handleClick = (type) => {
-        if (type === 'favorite') {
-            setLike(!like);
-            setLikeList(user.uid, movieID);
-        } else if (type === 'collection') {
-            setCollect(!collect);
-            setCollectList(user.uid, movieID);
+        if (user) {
+            if (type === 'favorite') {
+                setLike(!like);
+                setLikeList(user.uid, movieID);
+            } else if (type === 'collection') {
+                setCollect(!collect);
+                setCollectList(user.uid, movieID);
+            }
+        } else {
+            setAlert(true);
         }
     };
 

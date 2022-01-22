@@ -39,7 +39,6 @@ const styles = {
 const Navtop = ({ openDrawer }) => {
     const theme = useTheme();
     const isPhone = useMediaQuery(theme.breakpoints.down('md'));
-    const location = useLocation();
     const trigger = useScrollTrigger();
     const [open, setOpen] = useState(false);
     const [isLogin, setIsLogin] = useState(false);
@@ -57,12 +56,16 @@ const Navtop = ({ openDrawer }) => {
     }, [user]);
 
     const handleSignin = () => {
-        SignInWithGoogle().then((user) => {
-            if (user) {
-                setIsLogin(true);
-                setOpen(true);
-            }
-        });
+        SignInWithGoogle()
+            .then((user) => {
+                if (user) {
+                    setIsLogin(true);
+                    setOpen(true);
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     };
     const handleLogout = () => {
         Logout();
