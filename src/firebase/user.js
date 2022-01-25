@@ -17,11 +17,15 @@ export const getUser = async (userID) => {
 };
 
 export const setUser = async ({ uid, displayName, photoURL, email }) => {
-    await updateDoc(doc(usersRef, uid), {
-        userName: displayName,
-        photoURL,
-        email,
-    });
+    await setDoc(
+        doc(usersRef, uid),
+        {
+            userName: displayName,
+            photoURL,
+            email,
+        },
+        { merge: true }
+    );
 };
 
 export const getCurrentLikeList = async (userID) => {
